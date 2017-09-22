@@ -10,4 +10,7 @@ public class Reservation {
     private LocalDateTime endDate;
     private boolean payment;
 
+    public Room getRoom() {
+        return room;
+    }
 }
