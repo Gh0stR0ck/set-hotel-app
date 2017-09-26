@@ -1,4 +1,4 @@
-package com.capgemini.hotel.core.controller;
+package com.capgemini.hotel.controller;
 
 import org.springframework.boot.*;
 import org.springframework.boot.autoconfigure.*;

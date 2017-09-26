@@ -1,23 +1,31 @@
-package com.capgemini.hotel.core.model;
+package com.capgemini.hotel.model;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class RoomManager {
+public class GuestManager {
 
-    private List<Room> roomList;
-    private List<Reservation> reservationList;
     private List<Guest> guestList;
 
-    public RoomManager() {
-        this.roomList = new ArrayList<>();
-        this.reservationList = new ArrayList<>();
+    public GuestManager() {
         this.guestList = new ArrayList<>();
     }
 
-    public List<Room> getRoomList() {
-        return roomList;
+    public void addGuest(Guest guest){
+        this.guestList.add(guest);
+    }
+    public void deleteGuest(Guest guest){
+        this.guestList.remove(guest);
+    }
+
+    public void modifyGuest(int guestId){
+
+        for(Guest guest : guestList) {
+            if(guest.getGuestNumber() == guestId) {
+
+            }
+        }
     }
 
     private List<Guest> searchGuest(Integer guestNumber, String surname, String firstname, String adress, String zipcode, String city, String country){
@@ -47,16 +55,9 @@ public class RoomManager {
 
     }
 
-    public List<Reservation> getReservationList() {
-        return reservationList;
-    }
-
     public List<Guest> getGuestList() {
         return guestList;
     }
 
-    public void addGuest(Guest guest){
-        this.guestList.add(guest);
-    }
 
 }

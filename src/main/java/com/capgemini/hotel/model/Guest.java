@@ -1,4 +1,4 @@
-package com.capgemini.hotel.core.model;
+package com.capgemini.hotel.model;
 
 public class Guest {
 

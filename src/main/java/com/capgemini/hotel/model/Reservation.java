@@ -1,4 +1,4 @@
-package com.capgemini.hotel.core.model;
+package com.capgemini.hotel.model;
 
 import java.time.LocalDateTime;
 

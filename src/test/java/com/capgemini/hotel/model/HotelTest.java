@@ -1,21 +1,22 @@
-package com.capgemini.hotel.core.model;
+package com.capgemini.hotel.model;
 
 import org.junit.Before;
+
 import org.junit.Test;
 
 import static org.junit.Assert.assertNotNull;
 
 
-public class RoomManagerTest {
+public class HotelTest {
 
     @Before
     public void init(){
         // initialise
-        RoomManager roomManager = new RoomManager();
+        Hotel hotel = new Hotel();
 
         Guest guest = new Guest(1, null, null, null, null, null, null, null, null);
 
-        roomManager.addGuest(guest);
+        hotel.guestManager.addGuest(guest);
     }
 
     @Test
