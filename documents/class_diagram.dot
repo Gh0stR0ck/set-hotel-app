@@ -1,0 +1,167 @@
+digraph {
+	forcelabels=true;
+	rankdir="TD";
+	splines=ortho;
+	
+	node [
+		shape=none;
+		margin=0;
+	];
+	
+	subgraph cluster_capgemini_hotel {
+		label="com.capgemini.hotel";
+		labeljust="l";
+		
+		room_status [
+			label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
+				<TR><TD ALIGN="CENTER" BALIGN="CENTER"><B>
+					&lt;&lt;enumeration&gt;&gt; <BR/>
+					RoomStatus
+				</B></TD></TR>
+				<TR><TD ALIGN="LEFT" BALIGN="LEFT">
+					OPERATIONAL <BR/>
+					BLOCKED
+				</TD></TR>
+				<TR><TD ALIGN="LEFT" BALIGN="LEFT">
+				</TD></TR>
+			</TABLE>>
+		];
+		room_size [
+			label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
+				<TR><TD ALIGN="CENTER" BALIGN="CENTER"><B>
+					&lt;&lt;enumeration&gt;&gt; <BR/>
+					RoomSize
+				</B></TD></TR>
+				<TR><TD ALIGN="LEFT" BALIGN="LEFT">
+					ONE_PERSON <BR/>
+					TWO_PERSON <BR/>
+					THREE_FOUR_PERSON <BR/>
+					FIVE_SIX_PERSON
+				</TD></TR>
+				<TR><TD ALIGN="LEFT" BALIGN="LEFT">
+				</TD></TR>
+			</TABLE>>
+		];
+		room_type [
+			label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
+				<TR><TD ALIGN="CENTER" BALIGN="CENTER"><B>
+					&lt;&lt;enumeration&gt;&gt; <BR/>
+					RoomType
+				</B></TD></TR>
+				<TR><TD ALIGN="LEFT" BALIGN="LEFT">
+					LUXE <BR/>
+					REGULAR <BR/>
+					BUDGET
+				</TD></TR>
+				<TR><TD ALIGN="LEFT" BALIGN="LEFT">
+				</TD></TR>
+			</TABLE>>
+		];
+		room [
+			label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
+				<TR><TD ALIGN="CENTER" BALIGN="CENTER"><B>
+					Room
+				</B></TD></TR>
+				<TR><TD ALIGN="LEFT" BALIGN="LEFT">
+					- roomNumber : int<BR/>
+					- roomType : RoomType<BR/>
+					- roomSize : RoomSize<BR/>
+					- roomStatus : RoomStatus
+				</TD></TR>
+				<TR><TD ALIGN="LEFT" BALIGN="LEFT">
+				</TD></TR>
+			</TABLE>>
+		];
+		reservation [
+			label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
+				<TR><TD ALIGN="CENTER" BALIGN="CENTER"><B>
+					Reservation
+				</B></TD></TR>
+				<TR><TD ALIGN="LEFT" BALIGN="LEFT">
+					- guest : Guest<BR/>
+					- room : Room<BR/>
+					- start : LocalDateTime<BR/>
+					- end : LocalDateTime<BR/>
+					- payment : boolean
+				</TD></TR>
+				<TR><TD ALIGN="LEFT" BALIGN="LEFT">
+				</TD></TR>
+			</TABLE>>
+		];
+		guest [
+			label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
+				<TR><TD ALIGN="CENTER" BALIGN="CENTER"><B>
+					Guest
+				</B></TD></TR>
+				<TR><TD ALIGN="LEFT" BALIGN="LEFT">
+					- guestId : int<BR/>
+					- surname : String<BR/>
+					- name : String<BR/>
+					- address : String<BR/>
+					- zipcode : String<BR/>
+					- city : String<BR/>
+					- country : String<BR/>
+					- phone : String<BR/>
+					- email : String
+				</TD></TR>
+				<TR><TD ALIGN="LEFT" BALIGN="LEFT">
+				</TD></TR>
+			</TABLE>>
+		];
+		room_manager [
+			label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
+				<TR><TD ALIGN="CENTER" BALIGN="CENTER"><B>
+					RoomManager
+				</B></TD></TR>
+				<TR><TD ALIGN="LEFT" BALIGN="LEFT">
+					- rooms : List&lt;Room&gt;
+				</TD></TR>
+				<TR><TD ALIGN="LEFT" BALIGN="LEFT">
+					+ addRoom(Room room) : void<BR/>
+					+ deleteRoom(Room room) : void<BR/>
+					+ findRoom(&lt;room identifiers&gt;) : Room
+				</TD></TR>
+			</TABLE>>
+		];
+		guest_manager [
+			label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
+				<TR><TD ALIGN="CENTER" BALIGN="CENTER"><B>
+					GuestManager
+				</B></TD></TR>
+				<TR><TD ALIGN="LEFT" BALIGN="LEFT">
+					- guests : List&lt;Guest&gt;
+				</TD></TR>
+				<TR><TD ALIGN="LEFT" BALIGN="LEFT">
+					+ addGuest(Guest guest) : void<BR/>
+					+ deleteGuest(Guest guest) : void<BR/>
+					+ findGuest(&lt;guest identifiers&gt;) : Guest
+				</TD></TR>
+			</TABLE>>
+		];
+		reservation_manager [
+			label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
+				<TR><TD ALIGN="CENTER" BALIGN="CENTER"><B>
+					ReservationManager
+				</B></TD></TR>
+				<TR><TD ALIGN="LEFT" BALIGN="LEFT">
+					- reservations : List&lt;Reservation&gt;
+				</TD></TR>
+				<TR><TD ALIGN="LEFT" BALIGN="LEFT">
+					+ addReservation(Reservation reservation) : void<BR/>
+					+ deleteReservation(Reservation reservation) : void<BR/>
+					+ findReservation(&lt;reservation identifiers&gt;) : Reservation
+				</TD></TR>
+			</TABLE>>
+		];
+	}
+	reservation -> guest [headlabel="1"];
+	reservation -> room [headlabel="1"];
+	
+	room -> room_size;
+	room -> room_status;
+	room -> room_type;
+	
+	guest_manager -> guest [headlabel="0..*"];
+	reservation_manager -> reservation [headlabel="0..*"];
+	room_manager -> room [headlabel="0..*"];
+}
