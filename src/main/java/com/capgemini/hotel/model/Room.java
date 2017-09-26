@@ -6,6 +6,13 @@ public class Room{
     private RoomSize roomSize;
     private RoomStatus roomStatus;
 
+    public Room(int roomNumber, RoomType roomType, RoomSize roomSize, RoomStatus roomStatus) {
+        this.roomNumber = roomNumber;
+        this.roomType = roomType;
+        this.roomSize = roomSize;
+        this.roomStatus = roomStatus;
+    }
+
     public RoomStatus getRoomStatus() {
         return roomStatus;
     }
