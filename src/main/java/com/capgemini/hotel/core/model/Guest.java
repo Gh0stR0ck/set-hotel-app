@@ -1,4 +1,4 @@
-package com.capgemini.hotel.core;
+package com.capgemini.hotel.core.model;
 
 public class Guest {
 
@@ -12,6 +12,17 @@ public class Guest {
     private String phone;
     private String email;
 
+    public Guest(int guestNumber, String surname, String name, String address, String zipcode, String city, String country, String phone, String email) {
+        this.guestNumber = guestNumber; // huidige nummer met 1
+        this.surname = surname;
+        this.name = name;
+        this.address = address;
+        this.zipcode = zipcode;
+        this.city = city;
+        this.country = country;
+        this.phone = phone;
+        this.email = email;
+    }
 
     public int getGuestNumber() {
         return guestNumber;

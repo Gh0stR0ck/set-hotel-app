@@ -1,5 +1,6 @@
-package com.capgemini.hotel.core;
+package com.capgemini.hotel.core.model;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -8,6 +9,12 @@ public class RoomManager {
     private List<Room> roomList;
     private List<Reservation> reservationList;
     private List<Guest> guestList;
+
+    public RoomManager() {
+        this.roomList = new ArrayList<>();
+        this.reservationList = new ArrayList<>();
+        this.guestList = new ArrayList<>();
+    }
 
     public List<Room> getRoomList() {
         return roomList;
@@ -46,6 +53,10 @@ public class RoomManager {
 
     public List<Guest> getGuestList() {
         return guestList;
+    }
+
+    public void addGuest(Guest guest){
+        this.guestList.add(guest);
     }
 
 }

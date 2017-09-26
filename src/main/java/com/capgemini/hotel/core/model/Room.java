@@ -1,6 +1,4 @@
-package com.capgemini.hotel.core;
-
-import java.time.LocalDateTime;
+package com.capgemini.hotel.core.model;
 
 public class Room{
     private int roomNumber;
