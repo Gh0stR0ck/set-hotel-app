@@ -3,6 +3,11 @@ digraph {
 	rankdir="TD";
 	splines=ortho;
 	
+	edge [
+		labelangle=65;
+		labeldistance=1.8;
+	];
+	
 	node [
 		shape=none;
 		margin=0;
