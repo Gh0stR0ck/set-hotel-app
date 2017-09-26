@@ -54,7 +54,7 @@ digraph {
 					RoomType
 				</B></TD></TR>
 				<TR><TD ALIGN="LEFT" BALIGN="LEFT">
-					LUXE <BR/>
+					LUXURIOUS <BR/>
 					REGULAR <BR/>
 					BUDGET
 				</TD></TR>
@@ -161,7 +161,7 @@ digraph {
 		hotel [
 			label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
 				<TR><TD ALIGN="CENTER" BALIGN="CENTER"><B>
-					hotel
+					Hotel
 				</B></TD></TR>
 				<TR><TD ALIGN="LEFT" BALIGN="LEFT">
 					- guestManager : GuestManager<BR/>
