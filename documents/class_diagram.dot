@@ -153,6 +153,20 @@ digraph {
 				</TD></TR>
 			</TABLE>>
 		];
+		hotel [
+			label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
+				<TR><TD ALIGN="CENTER" BALIGN="CENTER"><B>
+					hotel
+				</B></TD></TR>
+				<TR><TD ALIGN="LEFT" BALIGN="LEFT">
+					- guestManager : GuestManager<BR/>
+					- reservationManager : ReservationManager<BR/>
+					- roomManager : RoomManager
+				</TD></TR>
+				<TR><TD ALIGN="LEFT" BALIGN="LEFT">
+				</TD></TR>
+			</TABLE>>
+		];
 	}
 	reservation -> guest [headlabel="1"];
 	reservation -> room [headlabel="1"];
@@ -160,6 +174,10 @@ digraph {
 	room -> room_size;
 	room -> room_status;
 	room -> room_type;
+	
+	hotel -> guest_manager[headlabel="1"];
+	hotel -> reservation_manager[headlabel="1"];
+	hotel -> room_manager[headlabel="1"];
 	
 	guest_manager -> guest [headlabel="0..*"];
 	reservation_manager -> reservation [headlabel="0..*"];
