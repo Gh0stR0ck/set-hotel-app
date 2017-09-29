@@ -20,7 +20,6 @@ public class GuestManager {
     }
 
     public void modifyGuest(int guestId){
-
         for(Guest guest : guestList) {
             if(guest.getGuestNumber() == guestId) {
 

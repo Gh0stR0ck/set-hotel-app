@@ -7,19 +7,24 @@ public class RoomManager {
 
     private List<Room> rooms;
 
-    public Room produceRoom(int roomNumber, RoomType roomType, RoomSize roomSize, RoomStatus roomStatus){
-        Room room = new Room(roomNumber, roomType, roomSize, roomStatus);
-        rooms.add(room);
-        return room;
-    }
-
     public RoomManager() {
         this.rooms = new ArrayList<>();
+    }
+
+    public void addRoom(Room room){
+        this.rooms.add(room);
+    }
+
+    public void deleteRoom(Room room){
+        this.rooms.remove(room);
+    }
+
+    public void modifyRoom(Room room){
 
     }
+
 
     public List<Room> getRoomList() {
         return rooms;
     }
-
 }
