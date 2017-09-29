@@ -14,7 +14,7 @@ public class HotelTest {
         // initialise
         Hotel hotel = new Hotel();
 
-        Guest guest = new Guest(1, null, null, null, null, null, null, null, null);
+        Guest guest = new Guest( null, null, null, null, null, null, null, null);
 
         hotel.guestManager.addGuest(guest);
     }

@@ -1,7 +1,10 @@
 package com.capgemini.hotel.model;
 
+import java.util.concurrent.atomic.AtomicInteger;
+
 public class Guest {
 
+    private static final AtomicInteger count = new AtomicInteger(0);
     private int guestNumber;
     private String surname;
     private String name;
@@ -12,8 +15,8 @@ public class Guest {
     private String phone;
     private String email;
 
-    public Guest(int guestNumber, String surname, String name, String address, String zipcode, String city, String country, String phone, String email) {
-        this.guestNumber = guestNumber; // huidige nummer met 1
+    public Guest(String surname, String name, String address, String zipcode, String city, String country, String phone, String email) {
+        this.guestNumber = count.getAndIncrement();
         this.surname = surname;
         this.name = name;
         this.address = address;
@@ -22,6 +25,10 @@ public class Guest {
         this.country = country;
         this.phone = phone;
         this.email = email;
+    }
+
+    public static AtomicInteger getCount() {
+        return count;
     }
 
     public int getGuestNumber() {

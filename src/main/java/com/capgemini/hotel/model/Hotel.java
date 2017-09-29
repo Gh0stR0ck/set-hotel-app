@@ -3,9 +3,9 @@ package com.capgemini.hotel.model;
 
 public class Hotel {
 
-    public GuestManager guestManager;
-    public RoomManager roomManager;
-    public ReservationManager reservationManager;
+    public final GuestManager guestManager;
+    public final RoomManager roomManager;
+    public final ReservationManager reservationManager;
 
     public Hotel() {
         this.guestManager = new GuestManager();
