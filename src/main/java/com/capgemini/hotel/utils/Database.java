@@ -44,6 +44,7 @@ import java.util.logging.Logger;
             }
         }
 
+        //  QUERY voor de SELECT statements
         public ResultSet query(String sql) {
 
             System.out.println("Creating statement...");
@@ -51,6 +52,22 @@ import java.util.logging.Logger;
             try {
                 stmt = conn.createStatement();
                 ResultSet rs = stmt.executeQuery(sql);
+
+                return rs;
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+                return null;
+            }
+        }
+        // EXECUTE voor CUD (Create, Update, Delete)
+        public Boolean execute(String sql) {
+
+            System.out.println("Creating statement...");
+
+            try {
+                stmt = conn.createStatement();
+                Boolean rs = stmt.execute(sql);
 
                 return rs;
 
