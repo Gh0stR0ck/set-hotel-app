@@ -5,15 +5,28 @@ import java.util.List;
 
 public class RoomManager {
 
-    private List<Room> roomList;
+    private List<Room> rooms;
 
     public RoomManager() {
-        this.roomList = new ArrayList<>();
+        this.rooms = new ArrayList<>();
+    }
 
+    public void addRoom(Room room){
+        this.rooms.add(room);
+    }
+
+    public void deleteRoom(Room room){
+        this.rooms.remove(room);
+    }
+
+    public void modifyRoom(int roomId){
+        for(Room room : rooms) {
+            if(room.getRoomNumber() == roomId) {
+            }
+        }
     }
 
     public List<Room> getRoomList() {
-        return roomList;
+        return rooms;
     }
-
 }

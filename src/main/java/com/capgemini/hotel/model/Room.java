@@ -5,7 +5,6 @@ public class Room{
     private RoomType roomType;
     private RoomSize roomSize;
     private RoomStatus roomStatus;
-
     public RoomStatus getRoomStatus() {
         return roomStatus;
     }
@@ -20,5 +19,21 @@ public class Room{
 
     public RoomSize getRoomSize() {
         return roomSize;
+    }
+
+    public void setRoomNumber(int roomNumber) {
+        this.roomNumber = roomNumber;
+    }
+
+    public void setRoomType(RoomType roomType) {
+        this.roomType = roomType;
+    }
+
+    public void setRoomSize(RoomSize roomSize) {
+        this.roomSize = roomSize;
+    }
+
+    public void setRoomStatus(RoomStatus roomStatus) {
+        this.roomStatus = roomStatus;
     }
 }

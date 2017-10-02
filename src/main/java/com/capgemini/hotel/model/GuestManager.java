@@ -1,57 +1,33 @@
 package com.capgemini.hotel.model;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class GuestManager {
 
-    // Fields
     private List<Guest> guestList;
 
-    // Constructor
     public GuestManager() {
         this.guestList = new ArrayList<>();
     }
 
-    // ----------
-    // Methods
-    // ---------
-
-    // delete a guest from guestlist
+    public void addGuest(Guest guest){
+        this.guestList.add(guest);
+    }
     public void deleteGuest(Guest guest){
         this.guestList.remove(guest);
     }
-    
-    // add guest to guestlist
-    public void addGuest(Guest guest){
 
-        if(guest == null){
-            return;
-            // Case of inserting a null object in method.
-        }
+    public void modifyGuest(int guestId){
 
-        Guest foundGuest = null;
+        for(Guest guest : guestList) {
+            if(guest.getGuestNumber() == guestId) {
 
-        for(Guest currentGuest : guestList) {
-            if(currentGuest.getGuestNumber() == guest.getGuestNumber()) {
-                foundGuest = currentGuest;
-                break;
             }
         }
-
-        if(foundGuest != null){
-            // Remove and than add to 'modify' guest
-            guestList.remove(foundGuest);
-        }
-        // add new guest
-        guestList.add(guest);
-
-
     }
 
-    // return list based on search criteria
     private List<Guest> searchGuest(Integer guestNumber, String surname, String firstname, String adress, String zipcode, String city, String country){
         return guestList.stream()
                 .filter(guestNumber == null ?
@@ -79,21 +55,9 @@ public class GuestManager {
 
     }
 
-
-    // return the entire guestlist.
     public List<Guest> getGuestList() {
-        return Collections.unmodifiableList(guestList);
+        return guestList;
     }
 
 
-    // return a guest based on ID.
-    public Guest getGuest(int guestId){
-
-        for(Guest guest: guestList){
-            if(guest.getGuestNumber() == guestId){
-                return guest;
-            }
-        }
-        return null;
-    }
 }
