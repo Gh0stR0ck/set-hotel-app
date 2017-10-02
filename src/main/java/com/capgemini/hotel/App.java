@@ -1,16 +1,17 @@
 package com.capgemini.hotel;
 
-import com.capgemini.hotel.controller.apiController;
+import com.capgemini.hotel.model.Guest;
 import com.capgemini.hotel.model.Hotel;
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+@SpringBootApplication
 public class App {
 
+    public static Hotel hotel = new Hotel();
+
     public static void main(String[] args) throws Exception {
-        //SpringApplication.run(apiController.class, args);
+        SpringApplication.run(App.class, args);
 
-        Hotel hotel = new Hotel();
-
-        System.out.println(hotel.toString());
     }
 }
