@@ -19,10 +19,12 @@ public class RoomManager {
         this.rooms.remove(room);
     }
 
-    public void modifyRoom(Room room){
-
+    public void modifyRoom(int roomId){
+        for(Room room : rooms) {
+            if(room.getRoomNumber() == roomId) {
+            }
+        }
     }
-
 
     public List<Room> getRoomList() {
         return rooms;
