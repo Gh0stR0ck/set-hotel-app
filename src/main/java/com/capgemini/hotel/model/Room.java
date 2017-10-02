@@ -5,7 +5,6 @@ public class Room{
     private RoomType roomType;
     private RoomSize roomSize;
     private RoomStatus roomStatus;
-
     public RoomStatus getRoomStatus() {
         return roomStatus;
     }
