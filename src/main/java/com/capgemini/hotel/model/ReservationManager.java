@@ -15,6 +15,9 @@ public class ReservationManager {
         return reservationList;
     }
 
-
+//    public Reservation newReservation(){
+//        Reservation reservation = new Reservation();
+//        getReservationList().add(Guest);
+//    }
 
 }
