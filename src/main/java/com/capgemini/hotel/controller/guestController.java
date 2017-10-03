@@ -22,7 +22,7 @@ public class guestController {
 
         Guest guest1 = new Guest("Surname", "Name", null, null, null, null, null, null);
         Guest guest2 = new Guest("Surname2", "Name", null, null, null, null, null, null);
-        Guest guest3 = new Guest("Surname3", "Name", null, null, null, null, null, null);
+        Guest guest3 = new Guest("Surname3", "Name", "ad", "zc", "ci", "ctry", "0654", "email");
         hotel.guestManager.addGuest(guest1);
         hotel.guestManager.addGuest(guest2);
         hotel.guestManager.addGuest(guest3);
