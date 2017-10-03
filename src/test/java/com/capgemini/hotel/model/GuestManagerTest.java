@@ -43,13 +43,13 @@ private Hotel hotel;
         System.out.println(currentId);
 
         // getGuest met id. --currentId because of the AtomicInteger type.
-        Guest resultGuest = hotel.guestManager.getGuest(--currentId);
-        System.out.println(resultGuest.getGuestNumber());
-        assertTrue(resultGuest.getGuestNumber() == currentId);
-
-        // getguest met id 500 (bestaat niet)
-        resultGuest = hotel.guestManager.getGuest(500);
-        assertTrue(resultGuest == null);
+//        Guest resultGuest = hotel.guestManager.getGuest(--currentId);
+//        System.out.println(resultGuest.getGuestNumber());
+//        assertTrue(resultGuest.getGuestNumber() == currentId);
+//
+//        // getguest met id 500 (bestaat niet)
+//        resultGuest = hotel.guestManager.getGuest(500);
+//        assertTrue(resultGuest == null);
 
     }
 

@@ -4,10 +4,12 @@ import com.capgemini.hotel.model.Guest;
 import com.capgemini.hotel.model.Hotel;
 import com.capgemini.hotel.utils.Database;
 import com.sun.org.apache.xpath.internal.operations.Bool;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import java.sql.ResultSet;
 
-
+@SpringBootApplication
 public class App {
 
     public static Hotel hotel = new Hotel();
@@ -20,17 +22,6 @@ public class App {
                 "capgemini",
                 "hotel1");
 
-        db.open();
-
-        ResultSet resultSet = db.query("SELECT * FROM Room;");
-//        Boolean resultSet = db.execute("SELECT * FROM Room;");
-
-        while (resultSet.next()) {
-            System.out.println("RoomNr: " + resultSet.getInt("roomNr") + " RoomType: " + resultSet.getInt("roomType") + " RoomSize: " + resultSet.getInt("roomSize") + " RoomStatus: " + resultSet.getInt("roomStatus"));
-        }
-
-        resultSet.close();
-
-        db.close();
+        SpringApplication.run(App.class, args);
     }
 }
