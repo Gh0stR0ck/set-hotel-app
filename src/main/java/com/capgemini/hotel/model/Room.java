@@ -1,23 +1,34 @@
 package com.capgemini.hotel.model;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
 public class Room{
-    private int roomNumber;
+
+    @Id
+    @GeneratedValue(strategy= GenerationType.AUTO)
+    private Long roomNumber;
     private RoomType roomType;
     private RoomSize roomSize;
     private RoomStatus roomStatus;
 
-    public Room(int roomNumber, RoomType roomType, RoomSize roomSize, RoomStatus roomStatus) {
+    public Room(){}
+
+    public Room(Long roomNumber, RoomType roomType, RoomSize roomSize, RoomStatus roomStatus) {
         this.roomNumber = roomNumber;
         this.roomType = roomType;
         this.roomSize = roomSize;
         this.roomStatus = roomStatus;
     }
 
-    public int getRoomNumber() {
+    public Long getRoomNumber() {
         return roomNumber;
     }
 
-    public void setRoomNumber(int roomNumber) {
+    public void setRoomNumber(Long roomNumber) {
         this.roomNumber = roomNumber;
     }
 

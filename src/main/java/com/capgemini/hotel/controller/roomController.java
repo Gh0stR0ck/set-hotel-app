@@ -1,28 +1,45 @@
 package com.capgemini.hotel.controller;
 
 import com.capgemini.hotel.model.Room;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import com.capgemini.hotel.repository.roomRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 
-import static com.capgemini.hotel.App.hotel;
-
+@RestController
+@RequestMapping("/api/Rooms")
 public class roomController {
-    @RequestMapping("/api/Rooms")
-    @ResponseBody
-    public List<Room> roomList() {
 
-        Room room1 = new Room(null, null, null, null);
-        Room room2 = new Room(null, null, null, null);
-        Room room3 = new Room(null, null, null, null);
-        hotel.roomManager.addRoom(room1);
-        hotel.roomManager.addRoom(room2);
-        hotel.roomManager.addRoom(room3);
+    @Autowired
+    roomRepository repository;
 
-        return hotel.roomManager.getRoomList();
+    @RequestMapping(value = "/", method = RequestMethod.GET)
+    public Iterable<Room> getAll() {
+        return repository.findAll();
+    }
 
+    @RequestMapping(value = "/", method = RequestMethod.POST)
+    public Room post(@RequestBody Room room) {
+        repository.save(room);
+        return repository.findOne(room.getRoomNumber());
+    }
 
+    @RequestMapping(value = "/{roomNumber}/", method = RequestMethod.PUT)
+    public Room put(@RequestBody Room room, @PathVariable long roomNumber) {
+        repository.save(room);
+        return repository.findOne(room.getRoomNumber());
+    }
+
+    @RequestMapping(value = "/{roomNumber}/", method = RequestMethod.GET)
+    public Room get(@PathVariable long roomNumber) {
+        return repository.findOne(roomNumber);
+    }
+
+    @RequestMapping(value = "/{roomNumber}/", method = RequestMethod.DELETE)
+    public Boolean delete(@PathVariable long roomNumber) {
+        repository.delete(roomNumber);
+        return !repository.exists(roomNumber);
     }
 }
-}
+
+
