@@ -34,14 +34,19 @@
 .sidebar-nav li {
     text-indent: 20px;
     line-height: 40px;
+    padding 20px;
 }
+
 
 .sidebar-nav li a {
     display: block;
     text-decoration: none;
     color: #999999;
 }
-
+.sidebar-nav li menuActive {
+     background-color:#FFF;
+     font-color: #000;
+}
 .sidebar-nav li a:hover {
     text-decoration: none;
     color: #fff;
@@ -68,3 +73,6 @@
     background: none;
 }
 
+.highlight {
+    background-color: rgba(2, 90, 165, 0.5);
+}

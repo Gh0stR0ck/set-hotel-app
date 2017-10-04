@@ -3,27 +3,127 @@ package com.capgemini.hotel.controller;
 import com.capgemini.hotel.model.Guest;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.List;
 
-import static com.capgemini.hotel.App.hotel;
+import static com.capgemini.hotel.App.db;
 
 @RestController
 public class guestController {
 
-
-    @RequestMapping("/api/guest")
+    @RequestMapping(value = "/api/guest" , method = RequestMethod.GET)
     @ResponseBody
     public List<Guest> guestList() {
 
-        Guest guest1 = new Guest("Surname", "Name", null, null, null, null, null, null);
-        Guest guest2 = new Guest("Surname2", "Name", null, null, null, null, null, null);
-        Guest guest3 = new Guest("Surname3", "Name", "ad", "zc", "ci", "ctry", "0654", "email");
-        hotel.guestManager.addGuest(guest1);
-        hotel.guestManager.addGuest(guest2);
-        hotel.guestManager.addGuest(guest3);
+        db.open();
 
-        return hotel.guestManager.getGuestList();
+        List<Guest> guestList = new ArrayList<>();
+        ResultSet resultSet = db.query("SELECT * FROM hotel1.Guest");
+
+        try {
+            while (resultSet.next()) {
+                Guest guestResult = new Guest(null,null,null,null,null,null,null,null);
+
+                guestResult.setSurname(resultSet.getString("surname"));
+                guestResult.setName(resultSet.getString("name"));
+                guestResult.setAddress(resultSet.getString("address"));
+                guestResult.setZipcode(resultSet.getString("zipcode"));
+                guestResult.setCity(resultSet.getString("city"));
+                guestResult.setCountry(resultSet.getString("country"));
+                guestResult.setPhone(resultSet.getString("phone"));
+                guestResult.setEmail(resultSet.getString("email"));
+
+                guestList.add(guestResult);
+            }
+        } catch (java.sql.SQLException e) {
+            System.out.println(e);
+        } finally {
+            try {
+                resultSet.close();
+                db.close();
+            } catch (java.sql.SQLException e) {
+                System.out.println(e);
+            }
+        }
+        return guestList;
+
+    }
+
+    @RequestMapping(value= "/api/guest/Details/{id}", method = RequestMethod.GET)
+    @ResponseBody
+    public List<Guest> guestDetails(@PathVariable("id") long id) {
+
+        db.open();
+
+        List<Guest> guestList = new ArrayList<>();
+        ResultSet resultSet = db.query("SELECT * FROM hotel1.Guest WHERE idGuest ="+ id );
+
+        try {
+            while (resultSet.next()) {
+                Guest guestResult = new Guest(null,null,null,null,null,null,null,null);
+
+                guestResult.setSurname(resultSet.getString("surname"));
+                guestResult.setName(resultSet.getString("name"));
+                guestResult.setAddress(resultSet.getString("address"));
+                guestResult.setZipcode(resultSet.getString("zipcode"));
+                guestResult.setCity(resultSet.getString("city"));
+                guestResult.setCountry(resultSet.getString("country"));
+                guestResult.setPhone(resultSet.getString("phone"));
+                guestResult.setEmail(resultSet.getString("email"));
+
+                guestList.add(guestResult);
+            }
+        } catch (java.sql.SQLException e) {
+            System.out.println(e);
+        } finally {
+            try {
+                resultSet.close();
+                db.close();
+            } catch (java.sql.SQLException e) {
+                System.out.println(e);
+            }
+        }
+
+        return guestList;
 
 
     }
+
+    @RequestMapping(value = "/api/addUser", method = RequestMethod.POST)
+    public Guest process(@RequestBody Guest guest) {
+
+        System.out.println("Incoming: " + guest.getName() + "\t" + guest.getSurname());
+        db.open();
+
+        String query = "INSERT INTO `hotel1`.`Guest` (" +
+                                                    "`surname`, " +
+                                                    "`name`, " +
+                                                    "`address`, " +
+                                                    "`zipcode`, " +
+                                                    "`city`, " +
+                                                    "`country`, " +
+                                                    "`phone`, " +
+                                                    "`email`" +
+                ") VALUES (" +
+                "'"+ guest.getSurname() + "'," +
+                "'"+ guest.getName() + "'," +
+                "'"+ guest.getAddress() + "'," +
+                "'"+ guest.getZipcode() + "'," +
+                "'"+ guest.getCity() + "'," +
+                "'"+ guest.getCountry() + "'," +
+                "'"+ guest.getPhone() + "'," +
+                "'"+ guest.getEmail() + "');";
+
+
+        try {
+            db.execute(query);
+            return guest;
+        } finally {
+            db.close();
+
+        }
+
+    }
+
 }

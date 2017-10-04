@@ -15,6 +15,10 @@ public class Guest {
     private String phone;
     private String email;
 
+    public Guest() {
+        // JSON spring boot purpose
+    }
+
     public Guest(String surname, String name, String address, String zipcode, String city, String country, String phone, String email) {
         this.guestNumber = count.getAndIncrement();
         this.surname = surname;
@@ -65,5 +69,41 @@ public class Guest {
 
     public String getEmail() {
         return email;
+    }
+
+    public void setGuestNumber(int guestNumber) {
+        this.guestNumber = guestNumber;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public void setZipcode(String zipcode) {
+        this.zipcode = zipcode;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }
