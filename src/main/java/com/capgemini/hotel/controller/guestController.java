@@ -1,11 +1,6 @@
 package com.capgemini.hotel.controller;
 
 import com.capgemini.hotel.model.Guest;
-import com.capgemini.hotel.model.GuestManager;
-import com.capgemini.hotel.model.Hotel;
-import org.springframework.boot.*;
-import org.springframework.boot.autoconfigure.*;
-import org.springframework.stereotype.*;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

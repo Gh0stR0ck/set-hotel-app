@@ -1,13 +1,8 @@
 package com.capgemini.hotel;
 
-import com.capgemini.hotel.model.Guest;
-import com.capgemini.hotel.model.Hotel;
 import com.capgemini.hotel.utils.Database;
-import com.sun.org.apache.xpath.internal.operations.Bool;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-
-import java.sql.ResultSet;
 
 @SpringBootApplication
 public class App {
