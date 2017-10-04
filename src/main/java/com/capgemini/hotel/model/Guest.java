@@ -17,6 +17,7 @@ public class Guest {
 
     public Guest() {
         // JSON spring boot purpose
+        this.guestNumber = count.getAndIncrement();
     }
 
     public Guest(String surname, String name, String address, String zipcode, String city, String country, String phone, String email) {
@@ -105,5 +106,11 @@ public class Guest {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String toString() {
+        return String.format(
+                "Guest[id=%d, name='%s', surname='%s']",
+                guestNumber, name, surname);
     }
 }

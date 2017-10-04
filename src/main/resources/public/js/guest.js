@@ -1,11 +1,10 @@
-function loadGuestList(){
-
-    $('#guestTable').dataTable( {
+var table =
+    $('#guestTable').DataTable({
       "ajax":  {"url":"/api/guest","dataSrc":""},
       "columns": [
           { "data": "guestNumber" },
-          { "data": "surname" },
           { "data": "name" },
+          {"data": "surname"},
           { "data": "address" },
           { "data": "zipcode" },
           { "data": "city" },
@@ -20,6 +19,7 @@ function loadGuestList(){
                 "searchable": false
             }
         ],
+        "order": [[0, 'desc']],
        "pageLength": 10,
          "bLengthChange": false,
          "language": {
@@ -27,11 +27,8 @@ function loadGuestList(){
              }
     } );
 
-}
-
 
 function handleAddGuest(){
-
     var obj = {
         name:       $("#name").val(),
         surname:    $("#surname").val(),
@@ -42,8 +39,6 @@ function handleAddGuest(){
         phone:      $("#phone").val(),
         email:      $("#email").val()
     }
-
-
 
     $.ajax({
         url: "/api/addUser",
@@ -56,13 +51,6 @@ function handleAddGuest(){
             // toggle
             $("#guestModal").modal('toggle');
 
-            // empty form for reuse
-            $(':input','#addGuest')
-              .not(':button, :submit, :reset, :hidden')
-              .val('')
-              .removeAttr('checked')
-              .removeAttr('selected');
-
             // add to DataTable
               var table = $('#guestTable').DataTable();
               var rowNode = table
@@ -70,12 +58,11 @@ function handleAddGuest(){
                   .draw()
                   .node();
 
-              $( rowNode ).addClass( 'highlight' );
+            // Highlight row (timeout)
+            $(rowNode).addClass('table-success');
               setTimeout(function() {
-                  $( rowNode ).removeClass( 'highlight' );
+                  $(rowNode).removeClass('table-success');
               },3000);
-
-
     },
         error: function(err) {
         console.log(err);
@@ -85,6 +72,50 @@ function handleAddGuest(){
 }
 
 
-loadGuestList();
+// Show modal for updating guest
+$('#guestTable tbody').on('click', 'tr', function () {
+    var data = table.row(this).data();
+    console.log(data);
+    showGuestModal('modify', data);
+});
 
+// Show modal for adding guests
+$('#addGuestButton').on('click', function () {
+    showGuestModal('add');
+});
+
+function showGuestModal(format, data) {
+    // Populates inputfields and buttons based on format (String)
+    // data id optional.
+    switch (format) {
+        case 'modify':
+
+            // populate form
+            $.each(data, function (key, value) {
+                $('#addGuest').find("input[id='" + key + "']").val(value);
+            });
+            // initialize title and buttons
+            $('#modalLabel').html('Edit guest "' + data['name'] + ' ' + data ['surname'] + '"');
+            $('#guestDeleteButton').show();
+            $('#guestSaveButton').show();
+            $('#guestAddButton').hide();
+            break;
+
+        default:
+            // empty form
+            $(':input', '#addGuest')
+                .not(':button, :submit, :reset')
+                .val('');
+
+            // initialize title and buttons
+            $('#modalLabel').html('Add new guest');
+            $('#guestDeleteButton').hide();
+            $('#guestSaveButton').hide();
+            $('#guestAddButton').show();
+            break;
+    }
+
+    // show modal
+    $("#guestModal").modal('toggle');
+}
 

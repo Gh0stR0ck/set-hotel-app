@@ -35,6 +35,7 @@ public class guestController {
                 guestResult.setEmail(resultSet.getString("email"));
 
                 guestList.add(guestResult);
+
             }
         } catch (java.sql.SQLException e) {
             System.out.println(e);
@@ -57,7 +58,7 @@ public class guestController {
         db.open();
 
         List<Guest> guestList = new ArrayList<>();
-        ResultSet resultSet = db.query("SELECT * FROM hotel1.Guest WHERE idGuest ="+ id );
+        ResultSet resultSet = db.query("SELECT * FROM hotel1.Guest WHERE idGuest =" + id + " ORDER BY idGuest DESC");
 
         try {
             while (resultSet.next()) {
@@ -84,10 +85,7 @@ public class guestController {
                 System.out.println(e);
             }
         }
-
         return guestList;
-
-
     }
 
     @RequestMapping(value = "/api/addUser", method = RequestMethod.POST)
@@ -114,16 +112,12 @@ public class guestController {
                 "'"+ guest.getCountry() + "'," +
                 "'"+ guest.getPhone() + "'," +
                 "'"+ guest.getEmail() + "');";
-
-
         try {
             db.execute(query);
+            System.out.println(guest.toString());
             return guest;
         } finally {
             db.close();
-
         }
-
     }
-
 }
