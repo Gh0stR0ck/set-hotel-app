@@ -1,49 +1,90 @@
 function loadGuestList(){
-    $.get("/api/guest", function(result){
-        console.log(result);
-        //$("#guestTable").empty();
-        //$("#hotel_content").html("<pre>"+ JSON.stringify(result, undefined, 4) + "</pre>");
-        drawTable(result);
 
-        var table = $('#guestTable').DataTable({
-                                                   "pageLength": 10,
+    $('#guestTable').dataTable( {
+      "ajax":  {"url":"/api/guest","dataSrc":""},
+      "columns": [
+          { "data": "guestNumber" },
+          { "data": "surname" },
+          { "data": "name" },
+          { "data": "address" },
+          { "data": "zipcode" },
+          { "data": "city" },
+          { "data": "country" },
+          { "data": "phone" },
+          { "data": "email" }
+        ],
+        "columnDefs": [
+            {
+                "targets": [ 0 ],
+                "visible": false,
+                "searchable": false
+            }
+        ],
+       "pageLength": 10,
+         "bLengthChange": false,
+         "language": {
+             "info": "Showing guests _START_ to _END_ of _TOTAL_ "
+             }
+    } );
 
-                                                   "bLengthChange": false,
-                                                   "language": {
-                                                       "info": "Showing guests _START_ to _END_ of _TOTAL_ "
-                                                       }
-                                               });
-
-        $('#guestTable tbody').on('click', 'tr', function () {
-            var data = table.row( this ).data();
-            alert( 'You clicked on '+data[1]+'\'s row' );
-        } );
-    });
 }
 
-function drawTable(data) {
-    for (var i = 0; i < data.length; i++) {
-        drawRow(data[i]);
+
+function handleAddGuest(){
+
+    var obj = {
+        name:       $("#name").val(),
+        surname:    $("#surname").val(),
+        address:    $("#address").val(),
+        zipcode:    $("#zipcode").val(),
+        city:       $("#city").val(),
+        country:    $("#country").val(),
+        phone:      $("#phone").val(),
+        email:      $("#email").val()
     }
-}
 
-function drawRow(rowData) {
-    var row = $("<tr />")
-    $("#guestTable").append(row); //this will append tr element to table... keep its reference for a while since we will add cels into it
-    row.append($("<td>" + rowData.name + "</td>"));
-    row.append($("<td>" + rowData.surname + "</td>"));
-    row.append($("<td>" + rowData.address + "</td>"));
-    row.append($("<td>" + rowData.zipcode + "</td>"));
-    row.append($("<td>" + rowData.city + "</td>"));
-    row.append($("<td>" + rowData.country + "</td>"));
-    row.append($("<td>" + rowData.phone + "</td>"));
-    row.append($("<td>" + rowData.email + "</td>"));
+
+
+    $.ajax({
+        url: "/api/addUser",
+        type: "POST",
+        data: JSON.stringify(obj),
+        contentType: "application/json; charset=utf-8",
+        success: function(result) {
+            console.log(result);
+
+            // toggle
+            $("#guestModal").modal('toggle');
+
+            // empty form for reuse
+            $(':input','#addGuest')
+              .not(':button, :submit, :reset, :hidden')
+              .val('')
+              .removeAttr('checked')
+              .removeAttr('selected');
+
+            // add to DataTable
+              var table = $('#guestTable').DataTable();
+              var rowNode = table
+                  .row.add( result )
+                  .draw()
+                  .node();
+
+              $( rowNode ).addClass( 'highlight' );
+              setTimeout(function() {
+                  $( rowNode ).removeClass( 'highlight' );
+              },3000);
+
+
+    },
+        error: function(err) {
+        console.log(err);
+        alert("Error while adding guest: " + err);
+    }
+    });
 }
 
 
 loadGuestList();
-console.log( "ready!" );
 
-$(document).ready(function() {
 
-} );
