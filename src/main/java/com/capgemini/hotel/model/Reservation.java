@@ -1,22 +1,38 @@
 package com.capgemini.hotel.model;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.time.LocalDateTime;
 
+@Entity
 public class Reservation {
-    private int reservationNumber;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long reservationNumber;
     private Guest guest;
     private Room room;
     private LocalDateTime startDate;
     private LocalDateTime endDate;
     private boolean payment;
 
-    public Reservation(int reservationNumber, Guest guest, Room room, LocalDateTime startDate, LocalDateTime endDate, boolean payment) {
+    public Reservation(Long reservationNumber, Guest guest, Room room, LocalDateTime startDate, LocalDateTime endDate, boolean payment) {
         this.reservationNumber = reservationNumber;
         this.guest = guest;
         this.room = room;
         this.startDate = startDate;
         this.endDate = endDate;
         this.payment = payment;
+    }
+
+    public Long getReservationNumber() {
+        return reservationNumber;
+    }
+
+    public void setReservationNumber(Long reservationNumber) {
+        this.reservationNumber = reservationNumber;
     }
 
     public Guest getGuest() {

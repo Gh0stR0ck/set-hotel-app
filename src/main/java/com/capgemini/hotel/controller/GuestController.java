@@ -10,7 +10,7 @@ import java.util.List;
 import static com.capgemini.hotel.App.db;
 
 @RestController
-public class guestController {
+public class GuestController {
 
     @RequestMapping(value = "/api/guest" , method = RequestMethod.GET)
     @ResponseBody
@@ -95,14 +95,14 @@ public class guestController {
         db.open();
 
         String query = "INSERT INTO `hotel1`.`Guest` (" +
-                                                    "`surname`, " +
-                                                    "`name`, " +
-                                                    "`address`, " +
-                                                    "`zipcode`, " +
-                                                    "`city`, " +
-                                                    "`country`, " +
-                                                    "`phone`, " +
-                                                    "`email`" +
+                "`surname`, " +
+                "`name`, " +
+                "`address`, " +
+                "`zipcode`, " +
+                "`city`, " +
+                "`country`, " +
+                "`phone`, " +
+                "`email`" +
                 ") VALUES (" +
                 "'"+ guest.getSurname() + "'," +
                 "'"+ guest.getName() + "'," +
