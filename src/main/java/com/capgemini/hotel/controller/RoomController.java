@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/Rooms")
 public class RoomController {
 
+
     @Autowired
     RoomRepository repository;
 
@@ -29,17 +30,18 @@ public class RoomController {
         return repository.findOne(roomNumber);
     }
 
-    @RequestMapping(value = "/{roomNumber}/", method = RequestMethod.PUT)
-    public Room put(@RequestBody Room room, @PathVariable long roomNumber) {
+    @RequestMapping(value = "/", method = RequestMethod.PUT)
+    public Room put(@RequestBody Room room) {
         repository.save(room);
         return repository.findOne(room.getRoomNumber());
     }
 
-    @RequestMapping(value = "/{roomNumber}/", method = RequestMethod.DELETE)
-    public Boolean delete(@PathVariable long roomNumber) {
-        repository.delete(roomNumber);
-        return !repository.exists(roomNumber);
+    @RequestMapping(value = "/", method = RequestMethod.DELETE)
+    public Room delete(@RequestBody Room room) {
+        repository.delete(room);
+        return repository.findOne(room.getRoomNumber());
     }
+
 }
 
 
