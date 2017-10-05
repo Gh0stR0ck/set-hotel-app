@@ -82,7 +82,7 @@ function handleGuest(type) {
                 // Refresh DataTable
                 table.ajax.reload();
                 toastr["success"]('Guest ' + result["name"] + " " + result["surname"] + ' updated.')
-            }
+            };
             params.error = function (err) {
                 console.log(err);
                 toastr["error"]('Error while updating guest: ' + err);

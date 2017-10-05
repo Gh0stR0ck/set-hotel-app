@@ -99,6 +99,32 @@ function handleReservation (type) {
 }
 
 
+function updateDropdownMenu(url, objName, objValue, elementName, elementTarget, initialText, label) {
+    // url           --> API url
+    // objName       --> Text of dropdown item
+    // objValue      --> Value of dropdown item
+    // elementName   --> Name of the dropdown list to be generated
+    // elementTarget --> Name of the element where it should be placed
+    // initialText   --> Text like "select <guest>".
+    // label         --> Form textlabel
+
+    $("#" + elementTarget).empty();
+    $("#" + elementTarget).append('<label for=\"' + elementName + '\" class=\"col-sm-3 col-form-label\">' + label + '</label>');
+    $("#" + elementTarget).append('<select id=\"' + elementName + '\" class=\"custom-select col-sm-9\"></select>');
+    $("#" + elementName).append('<option selected>' + initialText + '</option>');
+
+    $.get(url, function (result) {
+        console.log(url + " / " + result);
+        $.each(result, function (key, value) {
+            if (value[objName] != undefined) {
+                $("#" + elementName).append('<option value=\"' + value[objValue] + '\">' + value[objName] + '</option>');
+            } else {
+                console.log('No result for ' + value[objName]);
+            }
+        });
+    })
+}
+
 // Show modal for updating reservation
 $('#reservationTable tbody').on('click', 'tr', function () {
     var data = table.row(this).data();
@@ -114,6 +140,9 @@ $('#addReservationButton').on('click', function () {
 function showReservationModal(format, data) {
     // Populates inputfields and buttons based on format (String)
     // data id optional.
+    updateDropdownMenu('/api/Rooms/', 'roomNumber', 'roomNumber', 'room', 'roominput', 'Select Room', 'Room');
+    updateDropdownMenu('/api/guest/', 'guestNumber', 'guestName', 'guest', 'guestinput', 'Select Guest', 'Guest');
+
     switch (format) {
         case 'modify':
 

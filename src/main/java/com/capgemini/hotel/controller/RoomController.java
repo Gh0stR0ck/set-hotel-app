@@ -19,8 +19,6 @@ public class RoomController {
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public Iterable<Room> getAll() {
-        Room room = new Room(1L, RoomType.BUDGET, RoomSize.FIVESIXPERSON, RoomStatus.OPERATIONAL);
-        repository.save(room);
         return repository.findAll();
     }
 
