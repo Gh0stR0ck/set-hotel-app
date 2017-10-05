@@ -1,6 +1,9 @@
 package com.capgemini.hotel.controller;
 
 import com.capgemini.hotel.model.Room;
+import com.capgemini.hotel.model.RoomSize;
+import com.capgemini.hotel.model.RoomStatus;
+import com.capgemini.hotel.model.RoomType;
 import com.capgemini.hotel.repository.RoomRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -16,6 +19,8 @@ public class RoomController {
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public Iterable<Room> getAll() {
+        Room room = new Room(1L, RoomType.BUDGET, RoomSize.FIVESIXPERSON, RoomStatus.OPERATIONAL);
+        repository.save(room);
         return repository.findAll();
     }
 

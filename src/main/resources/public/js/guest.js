@@ -4,7 +4,7 @@ var table =
       "columns": [
           { "data": "guestNumber" },
           { "data": "name" },
-          {"data": "surname"},
+          { "data": "surname"},
           { "data": "address" },
           { "data": "zipcode" },
           { "data": "city" },
