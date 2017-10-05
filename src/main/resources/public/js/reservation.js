@@ -1,16 +1,13 @@
 var table =
-    $('#guestTable').DataTable({
-      "ajax":  {"url":"/api/guest","dataSrc":""},
+    $('#reservationTable').DataTable({
+      "ajax":  {"url":"/api/reservation/","dataSrc":""},
       "columns": [
-          { "data": "guestNumber" },
-          { "data": "name" },
-          { "data": "surname"},
-          { "data": "address" },
-          { "data": "zipcode" },
-          { "data": "city" },
-          { "data": "country" },
-          { "data": "phone" },
-          { "data": "email" }
+          { "data": "reservationNumber" },
+          { "data": "guest" },
+          { "data": "room" },
+          { "data": "startDate" },
+          { "data": "endDate" },
+          { "data": "payment" }
         ],
         "columnDefs": [
             {
@@ -23,27 +20,24 @@ var table =
        "pageLength": 10,
          "bLengthChange": false,
          "language": {
-             "info": "Showing guests _START_ to _END_ of _TOTAL_ "
+             "info": "Showing reservations _START_ to _END_ of _TOTAL_ "
              }
     } );
 
 
-function handleGuest(type) {
+function handleReservation (type) {
 
     var obj = {
-        guestNumber: $("#guestNumber").val(),
-        name:       $("#name").val(),
-        surname:    $("#surname").val(),
-        address:    $("#address").val(),
-        zipcode:    $("#zipcode").val(),
-        city:       $("#city").val(),
-        country:    $("#country").val(),
-        phone:      $("#phone").val(),
-        email:      $("#email").val()
+        reservationNumber:  parseInt($("#reservationNumber").val(),10),
+        guestNumber:        $("#guest").val(),
+        room:               parseInt($("#room").val(),10),
+        startdate:          $("#startdate").val(),
+        enddate:            $("#enddate").val(),
+        payment:            $("#payment").val()
     }
 
     var params = {
-        url: "api/guest",
+        url: "/api/reservation/",
         data: JSON.stringify(obj),
         contentType: "application/json; charset=utf-8"
     };
@@ -55,7 +49,7 @@ function handleGuest(type) {
             params.success = function (result) {
                 console.log(result);
                 // toggle modal
-                $("#guestModal").modal('toggle');
+                $("#reservationModal").modal('toggle');
                 // add to DataTable
                 var rowNode = table.row.add(result).draw().node();
                 // Highlight row (timeout)
@@ -65,7 +59,7 @@ function handleGuest(type) {
                 }, 3000);
                 params.error = function (err) {
                     console.log(err);
-                    alert("Error while adding guest: " + err);
+                    alert("Error while adding reservation: " + err);
                 }
             };
             break;
@@ -75,12 +69,12 @@ function handleGuest(type) {
             params.success = function (result) {
                 console.log(result);
                 // toggle modal
-                $("#guestModal").modal('toggle');
+                $("#reservationModal").modal('toggle');
                 // Refresh DataTable
                 table.ajax.reload();
                 params.error = function (err) {
                     console.log(err);
-                    alert("Error while updating guest: " + err);
+                    alert("Error while updating reservation: " + err);
                 }
             };
             break;
@@ -90,13 +84,13 @@ function handleGuest(type) {
             params.success = function (result) {
                 console.log(result);
                 // Toggle modal
-                $("#guestModal").modal('toggle');
+                $("#reservationModal").modal('toggle');
                 // Reload DataTable
                 table.ajax.reload();
             };
             params.error = function (err) {
                 console.log(err);
-                alert("Error while deleting guest: " + err);
+                alert("Error while deleting reservation: " + err);
             };
             break;
 
@@ -105,19 +99,19 @@ function handleGuest(type) {
 }
 
 
-// Show modal for updating guest
-$('#guestTable tbody').on('click', 'tr', function () {
+// Show modal for updating reservation
+$('#reservationTable tbody').on('click', 'tr', function () {
     var data = table.row(this).data();
     console.log(data);
-    showGuestModal('modify', data);
+    showReservationModal('modify', data);
 });
 
-// Show modal for adding guests
-$('#addGuestButton').on('click', function () {
-    showGuestModal('add');
+// Show modal for adding reservations
+$('#addReservationButton').on('click', function () {
+    showReservationModal('add');
 });
 
-function showGuestModal(format, data) {
+function showReservationModal(format, data) {
     // Populates inputfields and buttons based on format (String)
     // data id optional.
     switch (format) {
@@ -125,29 +119,29 @@ function showGuestModal(format, data) {
 
             // populate form
             $.each(data, function (key, value) {
-                $('#addGuest').find("input[id='" + key + "']").val(value);
+                $('#addReservation').find("input[id='" + key + "']").val(value);
             });
             // initialize title and buttons
-            $('#modalLabel').html('Edit guest "' + data['name'] + ' ' + data ['surname'] + '"');
-            $('#guestDeleteButton').show();
-            $('#guestSaveButton').show();
-            $('#guestAddButton').hide();
+            $('#modalLabel').html('Edit reservation "' + data['guest.name'] + ' "');
+            $('#reservationDeleteButton').show();
+            $('#reservationSaveButton').show();
+            $('#reservationAddButton').hide();
             break;
 
         default:
             // empty form
-            $(':input', '#addGuest')
+            $(':input', '#addReservation')
                 .not(':button, :submit, :reset')
                 .val('');
 
             // initialize title and buttons
-            $('#modalLabel').html('Add new guest');
-            $('#guestDeleteButton').hide();
-            $('#guestSaveButton').hide();
-            $('#guestAddButton').show();
+            $('#modalLabel').html('Add new reservation');
+            $('#reservationDeleteButton').hide();
+            $('#reservationSaveButton').hide();
+            $('#reservationAddButton').show();
             break;
     }
 
     // show modal
-    $("#guestModal").modal('toggle');
+    $("#reservationModal").modal('toggle');
 }

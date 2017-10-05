@@ -17,6 +17,8 @@ public class Room{
 
     public Room(){}
 
+//    public Room(int roomNumber){}
+
     public Room(Long roomNumber, RoomType roomType, RoomSize roomSize, RoomStatus roomStatus) {
         this.roomNumber = roomNumber;
         this.roomType = roomType;
