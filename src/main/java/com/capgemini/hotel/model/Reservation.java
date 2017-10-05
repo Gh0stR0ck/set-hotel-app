@@ -1,9 +1,6 @@
 package com.capgemini.hotel.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
@@ -12,11 +9,17 @@ public class Reservation {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long reservationNumber;
+    @ManyToOne
     private Guest guest;
+    @ManyToOne
     private Room room;
     private LocalDateTime startDate;
     private LocalDateTime endDate;
     private boolean payment;
+
+    public Reservation() {
+
+    }
 
     public Reservation(Long reservationNumber, Guest guest, Room room, LocalDateTime startDate, LocalDateTime endDate, boolean payment) {
         this.reservationNumber = reservationNumber;

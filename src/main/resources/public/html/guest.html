@@ -49,6 +49,7 @@
             <div class="modal-body">
                 <div class="container">
                 <form id="addGuest">
+                    <input type="hidden" class="form-control" id="guestNumber">
 
                     <div class="form-group row">
                         <label for="name" class="col-sm-2 col-form-label">Name</label>
@@ -109,11 +110,13 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                <button id="guestDeleteButton" type="button" class="btn btn-danger">Delete</button>
-                <button id="guestAddButton" type="button" class="btn btn-success" onclick="handleAddGuest();">Add
+                <button id="guestDeleteButton" type="button" class="btn btn-danger" onclick="handleGuest('delete');">
+                    Delete
+                </button>
+                <button id="guestAddButton" type="button" class="btn btn-success" onclick="handleGuest('post');">Add
                     guest
                 </button>
-                <button id="guestSaveButton" type="button" class="btn btn-success" onclick="handleSaveGuest();">Save
+                <button id="guestSaveButton" type="button" class="btn btn-success" onclick="handleGuest('update');">Save
                     guest
                 </button>
             </div>

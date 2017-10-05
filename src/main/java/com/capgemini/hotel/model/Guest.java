@@ -1,10 +1,13 @@
 package com.capgemini.hotel.model;
 
-import java.util.concurrent.atomic.AtomicInteger;
+import javax.persistence.*;
 
+@Entity
 public class Guest {
 
-    private static final AtomicInteger count = new AtomicInteger(0);
+    @Id
+    @Column(name = "guestNumber")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int guestNumber;
     private String surname;
     private String name;
@@ -17,24 +20,8 @@ public class Guest {
 
     public Guest() {
         // JSON spring boot purpose
-        this.guestNumber = count.getAndIncrement();
     }
 
-    public Guest(String surname, String name, String address, String zipcode, String city, String country, String phone, String email) {
-        this.guestNumber = count.getAndIncrement();
-        this.surname = surname;
-        this.name = name;
-        this.address = address;
-        this.zipcode = zipcode;
-        this.city = city;
-        this.country = country;
-        this.phone = phone;
-        this.email = email;
-    }
-
-    public static AtomicInteger getCount() {
-        return count;
-    }
 
     public int getGuestNumber() {
         return guestNumber;
@@ -72,10 +59,6 @@ public class Guest {
         return email;
     }
 
-    public void setGuestNumber(int guestNumber) {
-        this.guestNumber = guestNumber;
-    }
-
     public void setSurname(String surname) {
         this.surname = surname;
     }
@@ -108,6 +91,7 @@ public class Guest {
         this.email = email;
     }
 
+    @Override
     public String toString() {
         return String.format(
                 "Guest[id=%d, name='%s', surname='%s']",

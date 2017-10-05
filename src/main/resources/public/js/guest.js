@@ -28,8 +28,10 @@ var table =
     } );
 
 
-function handleAddGuest(){
+function handleGuest(type) {
+
     var obj = {
+        guestNumber: $("#guestNumber").val(),
         name:       $("#name").val(),
         surname:    $("#surname").val(),
         address:    $("#address").val(),
@@ -40,35 +42,66 @@ function handleAddGuest(){
         email:      $("#email").val()
     }
 
-    $.ajax({
-        url: "/api/addUser",
-        type: "POST",
+    var params = {
+        url: "api/guest",
         data: JSON.stringify(obj),
-        contentType: "application/json; charset=utf-8",
-        success: function(result) {
-            console.log(result);
+        contentType: "application/json; charset=utf-8"
+    };
 
-            // toggle
-            $("#guestModal").modal('toggle');
+    switch (type) {
+        case 'post':
 
-            // add to DataTable
-              var table = $('#guestTable').DataTable();
-              var rowNode = table
-                  .row.add( result )
-                  .draw()
-                  .node();
+            params.type = "POST";
+            params.success = function (result) {
+                console.log(result);
+                // toggle modal
+                $("#guestModal").modal('toggle');
+                // add to DataTable
+                var rowNode = table.row.add(result).draw().node();
+                // Highlight row (timeout)
+                $(rowNode).addClass('table-success');
+                setTimeout(function () {
+                    $(rowNode).removeClass('table-success');
+                }, 3000);
+                params.error = function (err) {
+                    console.log(err);
+                    alert("Error while adding guest: " + err);
+                }
+            };
+            break;
 
-            // Highlight row (timeout)
-            $(rowNode).addClass('table-success');
-              setTimeout(function() {
-                  $(rowNode).removeClass('table-success');
-              },3000);
-    },
-        error: function(err) {
-        console.log(err);
-        alert("Error while adding guest: " + err);
+        case 'update':
+            params.type = "PUT";
+            params.success = function (result) {
+                console.log(result);
+                // toggle modal
+                $("#guestModal").modal('toggle');
+                // Refresh DataTable
+                table.ajax.reload();
+                params.error = function (err) {
+                    console.log(err);
+                    alert("Error while updating guest: " + err);
+                }
+            };
+            break;
+
+        case 'delete':
+            params.type = "DELETE";
+            params.success = function (result) {
+                console.log(result);
+                // Toggle modal
+                $("#guestModal").modal('toggle');
+                // Reload DataTable
+                table.ajax.reload();
+            };
+            params.error = function (err) {
+                console.log(err);
+                alert("Error while deleting guest: " + err);
+            };
+            break;
+
     }
-    });
+    $.ajax(params);
 }
 
 
@@ -118,4 +151,3 @@ function showGuestModal(format, data) {
     // show modal
     $("#guestModal").modal('toggle');
 }
-
