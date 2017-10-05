@@ -62,12 +62,15 @@ function handleGuest(type) {
                 $(rowNode).addClass('table-success');
                 setTimeout(function () {
                     $(rowNode).removeClass('table-success');
-                }, 3000);
-                params.error = function (err) {
-                    console.log(err);
-                    alert("Error while adding guest: " + err);
-                }
+                }, 3000)
+                toastr["success"]('Guest ' + result["name"] + " " + result["surname"] + ' added.')
+
             };
+            params.error = function (err) {
+                console.log(err);
+                toastr["error"]('Error while adding guest: ' + err);
+            };
+
             break;
 
         case 'update':
@@ -78,11 +81,13 @@ function handleGuest(type) {
                 $("#guestModal").modal('toggle');
                 // Refresh DataTable
                 table.ajax.reload();
-                params.error = function (err) {
-                    console.log(err);
-                    alert("Error while updating guest: " + err);
-                }
+                toastr["success"]('Guest ' + result["name"] + " " + result["surname"] + ' updated.')
+            }
+            params.error = function (err) {
+                console.log(err);
+                toastr["error"]('Error while updating guest: ' + err);
             };
+
             break;
 
         case 'delete':
@@ -93,10 +98,11 @@ function handleGuest(type) {
                 $("#guestModal").modal('toggle');
                 // Reload DataTable
                 table.ajax.reload();
+                toastr["success"]('Guest ' + result["name"] + " " + result["surname"] + ' deleted.')
             };
             params.error = function (err) {
                 console.log(err);
-                alert("Error while deleting guest: " + err);
+                toastr["error"]('Error while deleting guest: ' + err);
             };
             break;
 
@@ -122,7 +128,6 @@ function showGuestModal(format, data) {
     // data id optional.
     switch (format) {
         case 'modify':
-
             // populate form
             $.each(data, function (key, value) {
                 $('#addGuest').find("input[id='" + key + "']").val(value);
@@ -139,7 +144,6 @@ function showGuestModal(format, data) {
             $(':input', '#addGuest')
                 .not(':button, :submit, :reset')
                 .val('');
-
             // initialize title and buttons
             $('#modalLabel').html('Add new guest');
             $('#guestDeleteButton').hide();

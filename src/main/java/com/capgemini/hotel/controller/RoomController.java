@@ -39,7 +39,7 @@ public class RoomController {
     @RequestMapping(value = "/", method = RequestMethod.DELETE)
     public Room delete(@RequestBody Room room) {
         repository.delete(room);
-        return repository.findOne(room.getRoomNumber());
+        return room;
     }
 
 }

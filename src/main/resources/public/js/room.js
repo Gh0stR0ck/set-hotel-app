@@ -50,9 +50,11 @@ function handleRoom(type) {
                 setTimeout(function () {
                     $(rowNode).removeClass('table-success');
                 }, 3000);
+                toastr["success"]('Room ' + result["roomNumber"] + ' added.');
+
                 params.error = function (err) {
                     console.log(err);
-                    alert("Error while adding room: " + err);
+                    toastr["error"]('Error: ' + err);
                 }
             };
             break;
@@ -65,9 +67,11 @@ function handleRoom(type) {
                 $("#roomModal").modal('toggle');
                 // Refresh DataTable
                 table.ajax.reload();
+                toastr["success"]('Room ' + result["roomNumber"] + ' updated.')
+
                 params.error = function (err) {
                     console.log(err);
-                    alert("Error while updating room: " + err);
+                    toastr["error"]('Error: ' + err);
                 }
             };
             break;
@@ -80,10 +84,12 @@ function handleRoom(type) {
                 $("#roomModal").modal('toggle');
                 // Reload DataTable
                 table.ajax.reload();
+                toastr["success"]('Room ' + result["roomNumber"] + ' deleted.')
+
             };
             params.error = function (err) {
                 console.log(err);
-                alert("Error while deleting room: " + err);
+                toastr["error"]('Error deleting room: ' + err);
             };
             break;
 
