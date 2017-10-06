@@ -99,7 +99,7 @@ function handleReservation (type) {
 }
 
 
-function updateDropdownMenu(url, objName, objValue, elementName, elementTarget, initialText, label) {
+function updateDropdownMenu(url, objName, objValue, elementName, elementTarget, initialText, label, sel) {
     // url           --> API url
     // objName       --> Text of dropdown item
     // objValue      --> Value of dropdown item
@@ -107,17 +107,20 @@ function updateDropdownMenu(url, objName, objValue, elementName, elementTarget, 
     // elementTarget --> Name of the element where it should be placed
     // initialText   --> Text like "select <guest>".
     // label         --> Form textlabel
+    // sel           --> Selected item
 
-    $("#" + elementTarget).empty();
-    $("#" + elementTarget).append('<label for=\"' + elementName + '\" class=\"col-sm-3 col-form-label\">' + label + '</label>');
-    $("#" + elementTarget).append('<select id=\"' + elementName + '\" class=\"custom-select col-sm-9\"></select>');
-    $("#" + elementName).append('<option selected>' + initialText + '</option>');
+    $("#" + elementTarget).empty()
+        .append('<label for=\"' + elementName + '\" class=\"col-sm-3 col-form-label\">' + label + '</label>')
+        .append('<select id=\"' + elementName + '\" class=\"custom-select col-sm-9\"></select>');
+    var selected = sel.val() !== '' ? 'selected' : '';
+    $("#" + elementName).append('<option ' + selected + '>' + initialText + '</option>');
 
     $.get(url, function (result) {
         console.log(url + " / " + result);
         $.each(result, function (key, value) {
-            if (value[objName] != undefined) {
-                $("#" + elementName).append('<option value=\"' + value[objValue] + '\">' + value[objName] + '</option>');
+            if (value[objName] !== undefined) {
+                var selected = (value[objValue] === sel) ? 'selected' : '';
+                $("#" + elementName).append('<option ' + selected + ' value=\"' + value[objValue] + '\">' + value[objName] + '</option>');
             } else {
                 console.log('No result for ' + value[objName]);
             }
