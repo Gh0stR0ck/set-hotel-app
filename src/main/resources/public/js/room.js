@@ -1,15 +1,19 @@
-var formatType;
-var formatStatus;
-var formatSize;
-
 var table =
     $('#roomTable').DataTable({
       "ajax":  {"url":"/api/Rooms/","dataSrc":""},
       "columns": [
           { "data": "roomNumber" },
+          {"data": "roomName"},
           { "data": "roomType" },
           { "data": "roomSize"},
-          { "data": "roomStatus" },
+          {"data": "roomStatus"}
+        ],
+        "columnDefs": [
+            {
+                "targets": [0],
+                "visible": false,
+                "searchable": false
+            }
         ],
         "order": [[0, 'desc']],
        "pageLength": 10,
@@ -24,6 +28,7 @@ function handleRoom(type) {
 
     var obj = {
         roomNumber:     $("#roomNumber").val(),
+        roomName: $("#roomName").val(),
         roomType:       $("#roomType").val(),
         roomSize:       $("#roomSize").val(),
         roomStatus:     $("#roomStatus").val(),

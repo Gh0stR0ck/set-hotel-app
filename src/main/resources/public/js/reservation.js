@@ -28,9 +28,9 @@ var table =
 function handleReservation (type) {
 
     var obj = {
-        reservationNumber:  parseInt($("#reservationNumber").val(),10),
+        reservationNumber: $("#reservationNumber").val(),
         guestNumber:        $("#guest").val(),
-        room:               parseInt($("#room").val(),10),
+        roomNumber: $("#room").val(),
         startdate:          $("#startdate").val(),
         enddate:            $("#enddate").val(),
         payment:            $("#payment").val()
@@ -111,16 +111,24 @@ function updateDropdownMenu(url, objName, objValue, elementName, elementTarget, 
 
     $("#" + elementTarget).empty()
         .append('<label for=\"' + elementName + '\" class=\"col-sm-3 col-form-label\">' + label + '</label>')
-        .append('<select id=\"' + elementName + '\" class=\"custom-select col-sm-9\"></select>');
-    var selected = sel.val() !== '' ? 'selected' : '';
+        .append('<select id=\"' + elementName + '\" class=\"custom-select col-sm-8\"></select>');
+    var selected = sel !== undefined ? 'selected' : '';
     $("#" + elementName).append('<option ' + selected + '>' + initialText + '</option>');
 
     $.get(url, function (result) {
         console.log(url + " / " + result);
         $.each(result, function (key, value) {
-            if (value[objName] !== undefined) {
+            console.log("l: " + value[objName[0]]);
+            if (value[objName[0]] !== undefined) {
                 var selected = (value[objValue] === sel) ? 'selected' : '';
-                $("#" + elementName).append('<option ' + selected + ' value=\"' + value[objValue] + '\">' + value[objName] + '</option>');
+                var optiontext = "";
+
+                for (var i = 0; i < objName.length; ++i) {
+                    console.log("l2: " + value[objName[i]]);
+                    optiontext += '' + value[objName[i]] + ' ';
+                }
+
+                $("#" + elementName).append('<option ' + selected + ' value=\"' + value[objValue] + '\">' + optiontext + '</option>');
             } else {
                 console.log('No result for ' + value[objName]);
             }
@@ -143,8 +151,8 @@ $('#addReservationButton').on('click', function () {
 function showReservationModal(format, data) {
     // Populates inputfields and buttons based on format (String)
     // data id optional.
-    updateDropdownMenu('/api/Rooms/', 'roomNumber', 'roomNumber', 'room', 'roominput', 'Select Room', 'Room');
-    updateDropdownMenu('/api/guest/', 'guestNumber', 'guestName', 'guest', 'guestinput', 'Select Guest', 'Guest');
+    updateDropdownMenu('/api/guest/', ['name', 'surname'], 'guestNumber', 'guest', 'guestinput', 'Select Guest', 'Guest');
+    updateDropdownMenu('/api/Rooms/', ['roomNumber'], 'roomNumber', 'room', 'roominput', 'Select Room', 'Room');
 
     switch (format) {
         case 'modify':
