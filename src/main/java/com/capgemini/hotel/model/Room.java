@@ -11,21 +11,11 @@ public class Room{
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Long roomNumber;
-    private String roomName;
     private RoomType roomType;
     private RoomSize roomSize;
     private RoomStatus roomStatus;
 
-    public Room(){}
-
-//    public Room(int roomNumber){}
-
-    public Room(Long roomNumber, String roomName, RoomType roomType, RoomSize roomSize, RoomStatus roomStatus) {
-        this.roomNumber = roomNumber;
-        this.roomName = roomName;
-        this.roomType = roomType;
-        this.roomSize = roomSize;
-        this.roomStatus = roomStatus;
+    public Room() {
     }
 
     public Long getRoomNumber() {
@@ -60,11 +50,4 @@ public class Room{
         this.roomStatus = roomStatus;
     }
 
-    public String getRoomName() {
-        return roomName;
-    }
-
-    public void setRoomName(String roomName) {
-        this.roomName = roomName;
-    }
 }

@@ -19,10 +19,10 @@
             <thead>
             <tr>
                 <th>Room Number</th>
-                <th>Room Name</th>
                 <th>Room Type</th>
                 <th>Room Size</th>
                 <th>Room Status</th>
+
             </tr>
             </thead>
             <tbody>
@@ -48,34 +48,35 @@
                         <input type="hidden" class="form-control" id="roomNumber">
 
                         <div class="form-group row">
-                            <label for="roomName" class="col-sm-3 col-form-label">Room name</label>
-                            <input type="text" class="form-control col-sm-8" id="roomName">
+                            <label for="roomType" class="col-sm-4 col-form-label">Room Type</label>
+                            <div class="col-sm-8">
+                            <select id="roomType">
+                                <option value="LUXURY">Luxury</option>
+                                <option value="NORMAL">Normal</option>
+                                <option value="BUDGET">Budget</option>
+                            </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="roomSize" class="col-sm-4 col-form-label">Room Size</label>
+                            <div class="col-sm-8">
+                                <select id="roomSize">
+                                <option value="ONEPERSON">One Person</option>
+                                <option value="TWOPERSONS">Two Persons</option>
+                                <option value="THREEFOURPERSONS">Three-Four Persons</option>
+                                <option value="FIVESIXPERSONS">Five-Six Persons</option>
+                            </select>
+                            </div>
                         </div>
 
                         <div class="form-group row">
-                            <label for="roomType" class="col-sm-3 col-form-label">Room type</label>
-                            <select id="roomType" class="custom-select col-sm-8">
-                                <option value="0">Luxury</option>
-                                <option value="1">Normal</option>
-                                <option value="2">Budget</option>
-                            </select>
-                        </div>
-                        <div class="form-group row">
-                            <label for="roomSize" class="col-sm-3 col-form-label">Room size</label>
-                            <select id="roomSize" class="custom-select col-sm-8">
-                                <option value="0">One Person</option>
-                                <option value="1">Two Persons</option>
-                                <option value="2">Three-Four Persons</option>
-                                <option value="3">Five-Six Persons</option>
-                            </select>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="roomStatus" class="col-sm-3 col-form-label">Room Status</label>
-                            <select id="roomStatus" class="custom-select col-sm-8">
-                                <option value="0">Operational</option>
-                                <option value="1">Blocked</option>
+                            <label for="roomStatus" class="col-sm-4 col-form-label">Room Status</label>
+                            <div class="col-sm-8">
+                                <select id="roomStatus">
+                                <option value="OPERATIONAL">Operational</option>
+                                <option value="BLOCKED">Blocked</option>
                                 </select>
+                            </div>
                         </div>
 
                     </form>
