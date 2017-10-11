@@ -15,15 +15,7 @@ public class Room{
     private RoomSize roomSize;
     private RoomStatus roomStatus;
 
-    public Room(){}
-
-//    public Room(int roomNumber){}
-
-    public Room(Long roomNumber, RoomType roomType, RoomSize roomSize, RoomStatus roomStatus) {
-        this.roomNumber = roomNumber;
-        this.roomType = roomType;
-        this.roomSize = roomSize;
-        this.roomStatus = roomStatus;
+    public Room() {
     }
 
     public Long getRoomNumber() {
@@ -57,4 +49,5 @@ public class Room{
     public void setRoomStatus(RoomStatus roomStatus) {
         this.roomStatus = roomStatus;
     }
+
 }

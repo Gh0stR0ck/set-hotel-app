@@ -1,15 +1,11 @@
-var formatType;
-var formatStatus;
-var formatSize;
-
 var table =
     $('#roomTable').DataTable({
       "ajax":  {"url":"/api/Rooms/","dataSrc":""},
       "columns": [
           { "data": "roomNumber" },
-          { "data": "roomType" },
-          { "data": "roomSize"},
-          { "data": "roomStatus" },
+          { "data": "roomType.label" },
+          { "data": "roomSize.label"},
+          { "data": "roomStatus.label" }
         ],
         "order": [[0, 'desc']],
        "pageLength": 10,
@@ -24,10 +20,12 @@ function handleRoom(type) {
 
     var obj = {
         roomNumber:     $("#roomNumber").val(),
-        roomType:       $("#roomType").val(),
-        roomSize:       $("#roomSize").val(),
-        roomStatus:     $("#roomStatus").val(),
+        roomType:       { name: $("#roomType").val() },
+        roomSize:       { name: $("#roomSize").val() },
+        roomStatus:     { name: $("#roomStatus").val() },
     }
+
+    console.log(obj);
 
     var params = {
         url: "api/Rooms/",
@@ -44,12 +42,13 @@ function handleRoom(type) {
                 // toggle modal
                 $("#roomModal").modal('toggle');
                 // add to DataTable
-                var rowNode = table.row.add(result).draw().node();
-                // Highlight row (timeout)
-                $(rowNode).addClass('table-success');
-                setTimeout(function () {
-                    $(rowNode).removeClass('table-success');
-                }, 3000);
+//                var rowNode = table.row.add(result).draw().node();
+//                // Highlight row (timeout)
+//                $(rowNode).addClass('table-success');
+//                setTimeout(function () {
+//                    $(rowNode).removeClass('table-success');
+//                }, 3000);
+                table.ajax.reload();
                 toastr["success"]('Room ' + result["roomNumber"] + ' added.');
 
                 params.error = function (err) {
