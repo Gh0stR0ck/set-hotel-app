@@ -3,15 +3,19 @@ var table =
       "ajax":  {"url":"/api/reservation/","dataSrc":""},
       "columns": [
           { "data": "reservationNumber" },
-          { "data": "guest" },
-          { "data": "room" },
+          {"data": "guestId"},
+          {"data": "roomId"},
           { "data": "startDate" },
           { "data": "endDate" },
-          { "data": "payment" }
+          {"data": "payment"},
+          {"data": "startDateFormatted"},
+          {"data": "endDateFormatted"},
+          {"data": "guestName"},
+          {"data": "roomName"}
         ],
         "columnDefs": [
             {
-                "targets": [ 0 ],
+                "targets": [1, 2, 3, 4],
                 "visible": false,
                 "searchable": false
             }
@@ -29,10 +33,10 @@ function handleReservation (type) {
 
     var obj = {
         reservationNumber: $("#reservationNumber").val(),
-        guestNumber:        $("#guest").val(),
-        roomNumber: $("#room").val(),
-        startdate:          $("#startdate").val(),
-        enddate:            $("#enddate").val(),
+        guestId: $("#guest").val(),
+        roomId: $("#room").val(),
+        startDate: $("#startdate").val(),
+        endDate: $("#enddate").val(),
         payment:            $("#payment").val()
     }
 
@@ -50,13 +54,9 @@ function handleReservation (type) {
                 console.log(result);
                 // toggle modal
                 $("#reservationModal").modal('toggle');
-                // add to DataTable
-                var rowNode = table.row.add(result).draw().node();
-                // Highlight row (timeout)
-                $(rowNode).addClass('table-success');
-                setTimeout(function () {
-                    $(rowNode).removeClass('table-success');
-                }, 3000);
+                // RELOAD DataTable
+                table.ajax.reload();
+
                 params.error = function (err) {
                     console.log(err);
                     alert("Error while adding reservation: " + err);
@@ -152,7 +152,7 @@ function showReservationModal(format, data) {
     // Populates inputfields and buttons based on format (String)
     // data id optional.
     updateDropdownMenu('/api/guest/', ['name', 'surname'], 'guestNumber', 'guest', 'guestinput', 'Select Guest', 'Guest');
-    updateDropdownMenu('/api/Rooms/', ['roomNumber'], 'roomNumber', 'room', 'roominput', 'Select Room', 'Room');
+    updateDropdownMenu('/api/Rooms/', ['roomName'], 'roomNumber', 'room', 'roominput', 'Select Room', 'Room');
 
     switch (format) {
         case 'modify':
@@ -185,3 +185,11 @@ function showReservationModal(format, data) {
     // show modal
     $("#reservationModal").modal('toggle');
 }
+
+//Datepickers
+$('#datepicker').datepicker();
+$('#datepicker').on('changeDate', function () {
+    $('#startdate').val(
+        $('#datepicker').datepicker('getFormattedDate')
+    );
+});

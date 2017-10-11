@@ -1,3 +1,4 @@
+<script src="vendor/bootstrap-datepicker-1.6.4-dist/js/bootstrap-datepicker.js"></script>
 <div class="row">
     <div class="col-md-6">
         <div style="text-align:left; padding-left:15px;">
@@ -19,11 +20,15 @@
             <thead>
             <tr>
                 <th>Reservation number</th>
-                <th>Name</th>
-                <th>Room</th>
+                <th>Guest ID</th>
+                <th>Room ID</th>
                 <th>Start date</th>
                 <th>End date</th>
                 <th>Payment</th>
+                <th>Check-in</th>
+                <th>Check-out</th>
+                <th>Guest</th>
+                <th>Room</th>
             </tr>
             </thead>
             <tbody>
@@ -54,18 +59,11 @@
                         <div class="form-group row" id="roominput">
                         </div>
 
-                        <div class="form-group row">
-                            <label for="startdate" class="col-sm-3 col-form-label">Startdate</label>
-                            <div class="col-sm-9">
-                                <input type="text" class="form-control" id="startdate">
-                            </div>
-                        </div>
 
-                        <div class="form-group row">
-                            <label for="enddate" class="col-sm-3 col-form-label">Enddate</label>
-                            <div class="col-sm-9">
-                                <input type="text" class="form-control" id="enddate">
-                            </div>
+                        <div class="form-group row" id="reservationdate">
+                            <div id="datepicker"></div>
+                            <input type="hidden" id="startdate">
+                            <input type="hidden" id="enddate">
                         </div>
 
                         <div class="form-group row">

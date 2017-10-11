@@ -3,9 +3,17 @@ var table =
       "ajax":  {"url":"/api/Rooms/","dataSrc":""},
       "columns": [
           { "data": "roomNumber" },
+          {"data": "roomName"},
           { "data": "roomType.label" },
           { "data": "roomSize.label"},
           { "data": "roomStatus.label" }
+        ],
+        "columnDefs": [
+            {
+                "targets": [0],
+                "visible": false,
+                "searchable": false
+            }
         ],
         "order": [[0, 'desc']],
        "pageLength": 10,
@@ -20,6 +28,7 @@ function handleRoom(type) {
 
     var obj = {
         roomNumber:     $("#roomNumber").val(),
+        roomName: $("#roomName").val(),
         roomType:       { name: $("#roomType").val() },
         roomSize:       { name: $("#roomSize").val() },
         roomStatus:     { name: $("#roomStatus").val() },

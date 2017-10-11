@@ -8,7 +8,7 @@ public class Reservation {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long reservationNumber;
+    private long reservationNumber;
     @ManyToOne
     private Guest guest;
     @ManyToOne
@@ -21,8 +21,7 @@ public class Reservation {
 
     }
 
-    public Reservation(Long reservationNumber, Guest guest, Room room, LocalDateTime startDate, LocalDateTime endDate, boolean payment) {
-        this.reservationNumber = reservationNumber;
+    public Reservation(Guest guest, Room room, LocalDateTime startDate, LocalDateTime endDate, boolean payment) {
         this.guest = guest;
         this.room = room;
         this.startDate = startDate;
@@ -30,11 +29,11 @@ public class Reservation {
         this.payment = payment;
     }
 
-    public Long getReservationNumber() {
+    public long getReservationNumber() {
         return reservationNumber;
     }
 
-    public void setReservationNumber(Long reservationNumber) {
+    public void setReservationNumber(long reservationNumber) {
         this.reservationNumber = reservationNumber;
     }
 

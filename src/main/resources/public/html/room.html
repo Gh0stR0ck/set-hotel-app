@@ -19,6 +19,7 @@
             <thead>
             <tr>
                 <th>Room Number</th>
+                <th>Room Name</th>
                 <th>Room Type</th>
                 <th>Room Size</th>
                 <th>Room Status</th>
@@ -48,19 +49,27 @@
                         <input type="hidden" class="form-control" id="roomNumber">
 
                         <div class="form-group row">
-                            <label for="roomType" class="col-sm-4 col-form-label">Room Type</label>
+                            <label for="roomName" class="col-sm-3 col-form-label">Room name</label>
                             <div class="col-sm-8">
-                            <select id="roomType">
-                                <option value="LUXURY">Luxury</option>
-                                <option value="NORMAL">Normal</option>
-                                <option value="BUDGET">Budget</option>
-                            </select>
+                                <input type="text" class="form-control" id="roomName">
                             </div>
                         </div>
+
                         <div class="form-group row">
-                            <label for="roomSize" class="col-sm-4 col-form-label">Room Size</label>
+                            <label for="roomType" class="col-sm-3 col-form-label">Room type</label>
                             <div class="col-sm-8">
-                                <select id="roomSize">
+                                <select id="roomType" class="custom-select col-sm-8">
+                                    <option value="LUXURY">Luxury</option>
+                                    <option value="NORMAL">Normal</option>
+                                    <option value="BUDGET">Budget</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="roomSize" class="col-sm-3 col-form-label">Room size</label>
+                            <div class="col-sm-8">
+                                <select id="roomSize" class="custom-select col-sm-8">
                                 <option value="ONEPERSON">One Person</option>
                                 <option value="TWOPERSONS">Two Persons</option>
                                 <option value="THREEFOURPERSONS">Three-Four Persons</option>
@@ -70,9 +79,9 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="roomStatus" class="col-sm-4 col-form-label">Room Status</label>
+                            <label for="roomStatus" class="col-sm-3 col-form-label">Room status</label>
                             <div class="col-sm-8">
-                                <select id="roomStatus">
+                                <select id="roomStatus" class="custom-select col-sm-8">
                                 <option value="OPERATIONAL">Operational</option>
                                 <option value="BLOCKED">Blocked</option>
                                 </select>

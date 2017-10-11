@@ -1,10 +1,8 @@
 package com.capgemini.hotel.model;
 
 public enum RoomSize {
-    ONEPERSON("1 person"),
-    TWOPERSON("2 persons"),
-    THREEFOURPERSON("3-4 persons"),
-    FIVESIXPERSON("5-6 persons");
+    ONEPERSON("1-person room"), TWOPERSONS("2-person room"), THREEFOURPERSONS("3/4-person room"), FIVESIXPERSONS("5/6-person room");
+
 
     private String label;
 
@@ -12,7 +10,7 @@ public enum RoomSize {
         this.label = label;
     }
 
-    public String getName() {
+    public String getLabel() {
         return label;
     }
 }
