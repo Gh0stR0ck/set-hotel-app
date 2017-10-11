@@ -1,3 +1,6 @@
+<script src="jquery.js"></script>
+<script src="parsley.min.js"></script>
+
 <div class="row">
     <div class="col-md-6">
         <div style="text-align:left; padding-left:15px;">
@@ -48,7 +51,7 @@
             </div>
             <div class="modal-body">
                 <div class="container">
-                <form id="addGuest">
+                <form id="addGuest" data-parsley-validate>
                     <input type="hidden" class="form-control" id="guestNumber">
 
                     <div class="form-group row">
@@ -104,7 +107,7 @@
                             <input type="email" class="form-control" id="email">
                         </div>
                     </div>
-
+                    <p>All fields are mandatory.</p>
                 </form>
                 </div>
             </div>
@@ -124,4 +127,8 @@
     </div>
 </div>
 
+<script>
+var instance = $('#addGuest').parsley();
+console.log(instance.isValid());
+</script>
 <script src="js/guest.js"></script>
