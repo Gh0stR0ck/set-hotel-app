@@ -28,6 +28,35 @@ var table =
     } );
 
 
+$("#addGuest").validate({
+    rules: {
+        name: "required",
+        surname: "required",
+        address: "required",
+        zipcode: "required",
+        city: "required",
+        country: "required",
+        phone: "required",
+        email: {
+            required: true,
+            email: true
+        }
+    },
+    messages: {
+        name: "U heeft uw voornaam niet ingevuld.",
+        surname: "U heeft uw achternaam niet ingevuld.",
+        address: "U heeft uw adres niet ingevuld.",
+        zipcode: "U heeft uw postcode niet ingevuld.",
+        city: "U heeft uw woonplaats niet ingevuld.",
+        country: "U heeft uw land niet ingevuld.",
+        phone: "U heeft uw telefoonnummer niet ingevuld.",
+        email: {
+            required: "U heeft uw e-mail niet ingevuld.",
+            email: "Uw e-mail adres klopt niet."
+        }
+    }
+});
+
 function handleGuest(type) {
 
     var obj = {
@@ -107,7 +136,10 @@ function handleGuest(type) {
             break;
 
     }
-    $.ajax(params);
+
+    if($("#addGuest").valid()){
+        $.ajax(params);
+    }
 }
 
 
