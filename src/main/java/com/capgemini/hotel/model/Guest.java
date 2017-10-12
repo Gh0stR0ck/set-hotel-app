@@ -8,7 +8,7 @@ public class Guest {
     @Id
     @Column(name = "guestNumber")
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int guestNumber;
+    private long guestNumber;
     private String surname;
     private String name;
     private String address;
@@ -23,7 +23,7 @@ public class Guest {
     }
 
 
-    public int getGuestNumber() {
+    public long getGuestNumber() {
         return guestNumber;
     }
 

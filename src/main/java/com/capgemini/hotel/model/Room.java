@@ -11,11 +11,20 @@ public class Room{
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Long roomNumber;
+    private String roomName;
     private RoomType roomType;
     private RoomSize roomSize;
     private RoomStatus roomStatus;
 
     public Room() {
+    }
+
+    public String getRoomName() {
+        return roomName;
+    }
+
+    public void setRoomName(String roomName) {
+        this.roomName = roomName;
     }
 
     public Long getRoomNumber() {
