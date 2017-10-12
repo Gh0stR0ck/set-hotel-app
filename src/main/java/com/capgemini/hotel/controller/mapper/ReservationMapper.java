@@ -56,7 +56,7 @@ public class ReservationMapper {
             reservationDTO.setEndDateFormatted(fObject.format(reservation.getEndDate()));
             reservationDTO.setEndDatePresentation(fPresentation.format(reservation.getEndDate()));
         }
-        reservationDTO.setPayment(reservation.isPayment());
+        reservationDTO.setPayment(reservation.isPayment().toString());
 
 
         return reservationDTO;
@@ -78,7 +78,8 @@ public class ReservationMapper {
                     reservationDTO.getReservationNumber()
             );
         }
-        reservation.setPayment(reservationDTO.isPayment());
+        reservation.setPayment(Boolean.valueOf(reservationDTO.getPayment()));
+
 
         if (reservationDTO.getStartDateFormatted() != null) {
             reservation.setStartDate(

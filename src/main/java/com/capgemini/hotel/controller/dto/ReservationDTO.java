@@ -1,26 +1,40 @@
 package com.capgemini.hotel.controller.dto;
 
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.NotEmpty;
+
 import javax.persistence.*;
+import javax.validation.Valid;
+import javax.validation.constraints.AssertFalse;
+import javax.validation.constraints.AssertTrue;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import java.time.LocalDateTime;
 
 
 public class ReservationDTO {
 
     private Long reservationNumber;
-    private long guestId;
-    private long roomId;
+    @NotNull(message = "Guest must be specified.")
+    private Long guestId;
+    @NotNull(message = "Room must be specified.")
+    private Long roomId;
 
-    private boolean payment;
+
+    @NotEmpty(message = "Payment must be specified.")
+    private String payment;
 
     // used for incoming String Input & outgoing formatted text.
+    @NotEmpty(message = "Date must be specified.")
     private String startDateFormatted;
     private String endDateFormatted;
-
     private String startDatePresentation;
     private String endDatePresentation;
 
 
     //only used for readability outgoing.
+
     private String guestName;
     private String roomName;
 
@@ -36,27 +50,27 @@ public class ReservationDTO {
         this.reservationNumber = reservationNumber;
     }
 
-    public long getGuestId() {
+    public Long getGuestId() {
         return guestId;
     }
 
-    public void setGuestId(long guestId) {
+    public void setGuestId(Long guestId) {
         this.guestId = guestId;
     }
 
-    public long getRoomId() {
+    public Long getRoomId() {
         return roomId;
     }
 
-    public void setRoomId(long roomId) {
+    public void setRoomId(Long roomId) {
         this.roomId = roomId;
     }
 
-    public boolean isPayment() {
+    public String getPayment() {
         return payment;
     }
 
-    public void setPayment(boolean payment) {
+    public void setPayment(String payment) {
         this.payment = payment;
     }
 
@@ -76,22 +90,6 @@ public class ReservationDTO {
         this.endDateFormatted = endDateFormatted;
     }
 
-    public String getGuestName() {
-        return guestName;
-    }
-
-    public void setGuestName(String guestName) {
-        this.guestName = guestName;
-    }
-
-    public String getRoomName() {
-        return roomName;
-    }
-
-    public void setRoomName(String roomName) {
-        this.roomName = roomName;
-    }
-
     public String getStartDatePresentation() {
         return startDatePresentation;
     }
@@ -106,5 +104,21 @@ public class ReservationDTO {
 
     public void setEndDatePresentation(String endDatePresentation) {
         this.endDatePresentation = endDatePresentation;
+    }
+
+    public String getGuestName() {
+        return guestName;
+    }
+
+    public void setGuestName(String guestName) {
+        this.guestName = guestName;
+    }
+
+    public String getRoomName() {
+        return roomName;
+    }
+
+    public void setRoomName(String roomName) {
+        this.roomName = roomName;
     }
 }

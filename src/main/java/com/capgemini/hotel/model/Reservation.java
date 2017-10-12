@@ -15,7 +15,7 @@ public class Reservation {
     private Room room;
     private LocalDateTime startDate;
     private LocalDateTime endDate;
-    private boolean payment;
+    private Boolean payment;
 
     public Reservation() {
 
@@ -69,11 +69,11 @@ public class Reservation {
         this.endDate = endDate;
     }
 
-    public boolean isPayment() {
+    public Boolean isPayment() {
         return payment;
     }
 
-    public void setPayment(boolean payment) {
+    public void setPayment(Boolean payment) {
         this.payment = payment;
     }
 }

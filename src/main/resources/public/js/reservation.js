@@ -57,11 +57,11 @@ function handleReservation (type) {
                 $("#reservationModal").modal('toggle');
                 // RELOAD DataTable
                 table.ajax.reload();
-
-                params.error = function (err) {
+                toastr["success"]('Reservation added.');
+            };
+            params.error = function (err) {
                     console.log(err);
-                    alert("Error while adding reservation: " + err);
-                }
+                    toastr["error"](err.responseJSON.join('<br>'));
             };
             break;
 
@@ -73,11 +73,13 @@ function handleReservation (type) {
                 $("#reservationModal").modal('toggle');
                 // Refresh DataTable
                 table.ajax.reload();
-                params.error = function (err) {
-                    console.log(err);
-                    alert("Error while updating reservation: " + err);
-                }
+                toastr["success"]('Reservation updated.');
             };
+            params.error = function (err) {
+                    console.log(err);
+                    toastr["error"](err.responseJSON.join('<br>'));
+            };
+
             break;
 
         case 'delete':
@@ -88,10 +90,11 @@ function handleReservation (type) {
                 $("#reservationModal").modal('toggle');
                 // Reload DataTable
                 table.ajax.reload();
+                toastr["success"]('Reservation deleted.');
             };
             params.error = function (err) {
                 console.log(err);
-                alert("Error while deleting reservation: " + err);
+                toastr["error"](err.responseJSON.join('<br>'));
             };
             break;
 
@@ -112,9 +115,9 @@ function updateDropdownMenu(url, objName, objValue, elementName, elementTarget, 
 
     $("#" + elementTarget).empty()
         .append('<label for=\"' + elementName + '\" class=\"col-sm-3 col-form-label\">' + label + '</label>')
-        .append('<select id=\"' + elementName + '\" class=\"custom-select col-sm-8\"></select>');
+        .append('<select id=\"' + elementName + '\" class=\"custom-select col-sm-8\" ></select>');
     var selected = sel !== undefined ? 'selected' : '';
-    $("#" + elementName).append('<option ' + selected + '>' + initialText + '</option>');
+    $("#" + elementName).append('<option ' + selected + ' value=\"\">' + initialText + '</option>');
 
     $.get(url, function (result) {
         //console.log(url + " / " + result);
