@@ -1,4 +1,4 @@
-package com.capgemini.hotel.model;
+package com.capgemini.hotel.controller.dto;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;

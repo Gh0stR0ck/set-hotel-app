@@ -34,7 +34,7 @@
 .sidebar-nav li {
     text-indent: 20px;
     line-height: 40px;
-    padding 20px;
+    padding: 20px;
 }
 
 
@@ -75,4 +75,11 @@
 
 .highlight {
     background-color: rgba(2, 90, 165, 0.5);
+}
+
+.daterangepicker {
+    background: #FFFFFF;
+    cursor: pointer;
+    padding: 5px 10px;
+    border: 1px solid #ccc;
 }

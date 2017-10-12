@@ -32,12 +32,13 @@ var table =
 function handleReservation (type) {
 
     var obj = {
+        // ReservationDTO
         reservationNumber: $("#reservationNumber").val(),
         guestId: $("#guest").val(),
         roomId: $("#room").val(),
-        startDate: $("#startdate").val(),
-        endDate: $("#enddate").val(),
-        payment:            $("#payment").val()
+        startDateFormatted: $("#startDate").val(),
+        endDateFormatted: $("#endDate").val(),
+        payment: $("#payment").val()
     }
 
     var params = {
@@ -187,9 +188,12 @@ function showReservationModal(format, data) {
 }
 
 //Datepickers
-$('#datepicker').datepicker();
-$('#datepicker').on('changeDate', function () {
-    $('#startdate').val(
-        $('#datepicker').datepicker('getFormattedDate')
-    );
+$('#daterangepicker').daterangepicker({
+    "autoApply": true,
+    "timePicker": true,
+    "opens": "center"
+}, function (start, end, label) {
+    $('#daterangepicker span').html(start.format('DD-MM-YYYY') + ' to ' + end.format('DD-MM-YYYY'));
+    $('#startDate').val(start.format('YYYY-MM-DD') + 'T' + start.format('HH:mm:ss') + 'Z');
+    $('#endDate').val(end.format('YYYY-MM-DD') + 'T' + end.format('HH:mm:ss') + 'Z');
 });
