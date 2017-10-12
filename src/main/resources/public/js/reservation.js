@@ -5,8 +5,8 @@ var table =
           { "data": "reservationNumber" },
           {"data": "guestId"},
           {"data": "roomId"},
-          { "data": "startDate" },
-          { "data": "endDate" },
+          {"data": "startDatePresentation"},
+          {"data": "endDatePresentation"},
           {"data": "payment"},
           {"data": "startDateFormatted"},
           {"data": "endDateFormatted"},
@@ -15,7 +15,7 @@ var table =
         ],
         "columnDefs": [
             {
-                "targets": [1, 2, 3, 4],
+                "targets": [1, 2, 6, 7],
                 "visible": false,
                 "searchable": false
             }
@@ -117,15 +117,15 @@ function updateDropdownMenu(url, objName, objValue, elementName, elementTarget, 
     $("#" + elementName).append('<option ' + selected + '>' + initialText + '</option>');
 
     $.get(url, function (result) {
-        console.log(url + " / " + result);
+        //console.log(url + " / " + result);
         $.each(result, function (key, value) {
-            console.log("l: " + value[objName[0]]);
+            //console.log("l: " + value[objName[0]]);
             if (value[objName[0]] !== undefined) {
                 var selected = (value[objValue] === sel) ? 'selected' : '';
                 var optiontext = "";
 
                 for (var i = 0; i < objName.length; ++i) {
-                    console.log("l2: " + value[objName[i]]);
+                    //console.log("l2: " + value[objName[i]]);
                     optiontext += '' + value[objName[i]] + ' ';
                 }
 
@@ -140,7 +140,7 @@ function updateDropdownMenu(url, objName, objValue, elementName, elementTarget, 
 // Show modal for updating reservation
 $('#reservationTable tbody').on('click', 'tr', function () {
     var data = table.row(this).data();
-    console.log(data);
+    //console.log(data);
     showReservationModal('modify', data);
 });
 
@@ -163,10 +163,15 @@ function showReservationModal(format, data) {
                 $('#addReservation').find("input[id='" + key + "']").val(value);
             });
             // initialize title and buttons
-            $('#modalLabel').html('Edit reservation "' + data['guest.name'] + ' "');
+            $('#modalLabel').html('Edit reservation no. ' + data['reservationNumber'] + ' of "' + data['guestName'] + ' "');
             $('#reservationDeleteButton').show();
             $('#reservationSaveButton').show();
             $('#reservationAddButton').hide();
+
+            //set start and end date fields
+            $('#daterangepicker').data('daterangepicker').setStartDate(data['startDatePresentation']);
+            $('#daterangepicker').data('daterangepicker').setEndDate(data['endDatePresentation']);
+            $('#daterangepicker span').html(data['startDatePresentation'] + ' to ' + data['endDatePresentation']);
             break;
 
         default:
@@ -180,6 +185,12 @@ function showReservationModal(format, data) {
             $('#reservationDeleteButton').hide();
             $('#reservationSaveButton').hide();
             $('#reservationAddButton').show();
+
+            $('#daterangepicker').data('daterangepicker').setStartDate();
+            $('#daterangepicker').data('daterangepicker').setEndDate();
+            $('#daterangepicker span').html('');
+
+
             break;
     }
 
@@ -190,10 +201,13 @@ function showReservationModal(format, data) {
 //Datepickers
 $('#daterangepicker').daterangepicker({
     "autoApply": true,
-    "timePicker": true,
-    "opens": "center"
+    "opens": "center",
+    "locale": {
+        "format": "DD/MM/YY"
+    }
 }, function (start, end, label) {
-    $('#daterangepicker span').html(start.format('DD-MM-YYYY') + ' to ' + end.format('DD-MM-YYYY'));
-    $('#startDate').val(start.format('YYYY-MM-DD') + 'T' + start.format('HH:mm') + 'Z');
-    $('#endDate').val(end.format('YYYY-MM-DD') + 'T' + end.format('HH:mm') + 'Z');
+    console.log('s: ' + start + '  e: ' + end);
+    $('#daterangepicker span').html(start.format('DD/MM/YY') + ' to ' + end.format('DD/MM/YY'));
+    $('#startDate').val(start.format('DD/MM/YY') + 'T16:00');
+    $('#endDate').val(end.format('DD/MM/YY') + 'T10:00');
 });

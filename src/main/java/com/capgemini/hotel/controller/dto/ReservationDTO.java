@@ -9,13 +9,16 @@ public class ReservationDTO {
     private Long reservationNumber;
     private long guestId;
     private long roomId;
-    private LocalDateTime startDate; //LDT
-    private LocalDateTime endDate; //LDT
+
     private boolean payment;
 
     // used for incoming String Input & outgoing formatted text.
     private String startDateFormatted;
     private String endDateFormatted;
+
+    private String startDatePresentation;
+    private String endDatePresentation;
+
 
     //only used for readability outgoing.
     private String guestName;
@@ -47,22 +50,6 @@ public class ReservationDTO {
 
     public void setRoomId(long roomId) {
         this.roomId = roomId;
-    }
-
-    public LocalDateTime getStartDate() {
-        return startDate;
-    }
-
-    public void setStartDate(LocalDateTime startDate) {
-        this.startDate = startDate;
-    }
-
-    public LocalDateTime getEndDate() {
-        return endDate;
-    }
-
-    public void setEndDate(LocalDateTime endDate) {
-        this.endDate = endDate;
     }
 
     public boolean isPayment() {
@@ -103,5 +90,21 @@ public class ReservationDTO {
 
     public void setRoomName(String roomName) {
         this.roomName = roomName;
+    }
+
+    public String getStartDatePresentation() {
+        return startDatePresentation;
+    }
+
+    public void setStartDatePresentation(String startDatePresentation) {
+        this.startDatePresentation = startDatePresentation;
+    }
+
+    public String getEndDatePresentation() {
+        return endDatePresentation;
+    }
+
+    public void setEndDatePresentation(String endDatePresentation) {
+        this.endDatePresentation = endDatePresentation;
     }
 }

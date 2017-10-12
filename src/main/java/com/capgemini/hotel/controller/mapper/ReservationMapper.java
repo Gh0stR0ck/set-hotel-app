@@ -9,8 +9,10 @@ import java.time.format.DateTimeFormatter;
 
 public class ReservationMapper {
 
-    private static final String DTO_DATE_FORMAT = "yyyy-MM-dd'T'HH:mm'Z'";
-    private static final DateTimeFormatter f = DateTimeFormatter.ofPattern(DTO_DATE_FORMAT);
+    private static final String PRESENTATION_DATE_FORMAT = "dd/MM/yy";
+    private static final String OBJECT_DATE_FORMAT = "dd/MM/yy'T'HH:mm";
+    private static final DateTimeFormatter fPresentation = DateTimeFormatter.ofPattern(PRESENTATION_DATE_FORMAT);
+    private static final DateTimeFormatter fObject = DateTimeFormatter.ofPattern(OBJECT_DATE_FORMAT);
 
     //
     //
@@ -19,13 +21,6 @@ public class ReservationMapper {
     public static ReservationDTO map(Reservation reservation) {
 
         final ReservationDTO reservationDTO = new ReservationDTO();
-
-        reservationDTO.setStartDate(
-                reservation.getStartDate()
-        );
-        reservationDTO.setEndDate(
-                reservation.getEndDate()
-        );
 
         if (reservation.getReservationNumber() != null) {
             reservationDTO.setReservationNumber(
@@ -54,10 +49,12 @@ public class ReservationMapper {
             );
         }
         if (reservation.getStartDate() != null) {
-            reservationDTO.setStartDateFormatted(f.format(reservation.getStartDate()));
+            reservationDTO.setStartDateFormatted(fObject.format(reservation.getStartDate()));
+            reservationDTO.setStartDatePresentation(fPresentation.format(reservation.getStartDate()));
         }
         if (reservation.getEndDate() != null) {
-            reservationDTO.setEndDateFormatted(f.format(reservation.getEndDate()));
+            reservationDTO.setEndDateFormatted(fObject.format(reservation.getEndDate()));
+            reservationDTO.setEndDatePresentation(fPresentation.format(reservation.getEndDate()));
         }
 
         return reservationDTO;
@@ -73,9 +70,6 @@ public class ReservationMapper {
 
         final Reservation reservation = new Reservation();
 
-        reservation.setEndDate(
-                reservationDTO.getEndDate()
-        );
 
         if (reservationDTO.getReservationNumber() != null) {
             reservation.setReservationNumber(
@@ -84,10 +78,13 @@ public class ReservationMapper {
         }
 
         if (reservationDTO.getStartDateFormatted() != null) {
-
             reservation.setStartDate(
-                    // format to appropriate date
-                    LocalDateTime.parse(reservationDTO.getStartDateFormatted(), f)
+                    LocalDateTime.parse(reservationDTO.getStartDateFormatted(), fObject)
+            );
+        }
+        if (reservationDTO.getEndDateFormatted() != null) {
+            reservation.setEndDate(
+                    LocalDateTime.parse(reservationDTO.getEndDateFormatted(), fObject)
             );
         }
 
