@@ -34,7 +34,8 @@
 .sidebar-nav li {
     text-indent: 20px;
     line-height: 40px;
-    padding: 20px;
+    padding: 5px;
+    padding-left: 16px;
 }
 
 
