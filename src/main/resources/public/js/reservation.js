@@ -194,6 +194,6 @@ $('#daterangepicker').daterangepicker({
     "opens": "center"
 }, function (start, end, label) {
     $('#daterangepicker span').html(start.format('DD-MM-YYYY') + ' to ' + end.format('DD-MM-YYYY'));
-    $('#startDate').val(start.format('YYYY-MM-DD') + 'T' + start.format('HH:mm:ss') + 'Z');
-    $('#endDate').val(end.format('YYYY-MM-DD') + 'T' + end.format('HH:mm:ss') + 'Z');
+    $('#startDate').val(start.format('YYYY-MM-DD') + 'T' + start.format('HH:mm') + 'Z');
+    $('#endDate').val(end.format('YYYY-MM-DD') + 'T' + end.format('HH:mm') + 'Z');
 });
