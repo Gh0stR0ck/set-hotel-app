@@ -152,8 +152,6 @@ $('#addReservationButton').on('click', function () {
 function showReservationModal(format, data) {
     // Populates inputfields and buttons based on format (String)
     // data id optional.
-    updateDropdownMenu('/api/guest/', ['name', 'surname'], 'guestNumber', 'guest', 'guestinput', 'Select Guest', 'Guest');
-    updateDropdownMenu('/api/Rooms/', ['roomName'], 'roomNumber', 'room', 'roominput', 'Select Room', 'Room');
 
     switch (format) {
         case 'modify':
@@ -162,6 +160,9 @@ function showReservationModal(format, data) {
             $.each(data, function (key, value) {
                 $('#addReservation').find("input[id='" + key + "']").val(value);
             });
+            updateDropdownMenu('/api/guest/', ['name', 'surname'], 'guestNumber', 'guest', 'guestinput', 'Select Guest', 'Guest', data['guestId']);
+            updateDropdownMenu('/api/Rooms/', ['roomName'], 'roomNumber', 'room', 'roominput', 'Select Room', 'Room', data['roomId']);
+
             // initialize title and buttons
             $('#modalLabel').html('Edit reservation no. ' + data['reservationNumber'] + ' of "' + data['guestName'] + ' "');
             $('#reservationDeleteButton').show();
@@ -172,6 +173,8 @@ function showReservationModal(format, data) {
             $('#daterangepicker').data('daterangepicker').setStartDate(data['startDatePresentation']);
             $('#daterangepicker').data('daterangepicker').setEndDate(data['endDatePresentation']);
             $('#daterangepicker span').html(data['startDatePresentation'] + ' to ' + data['endDatePresentation']);
+
+
             break;
 
         default:
@@ -179,6 +182,8 @@ function showReservationModal(format, data) {
             $(':input', '#addReservation')
                 .not(':button, :submit, :reset')
                 .val('');
+            updateDropdownMenu('/api/guest/', ['name', 'surname'], 'guestNumber', 'guest', 'guestinput', 'Select Guest', 'Guest');
+            updateDropdownMenu('/api/Rooms/', ['roomName'], 'roomNumber', 'room', 'roominput', 'Select Room', 'Room');
 
             // initialize title and buttons
             $('#modalLabel').html('Add new reservation');
@@ -210,4 +215,5 @@ $('#daterangepicker').daterangepicker({
     $('#daterangepicker span').html(start.format('DD/MM/YY') + ' to ' + end.format('DD/MM/YY'));
     $('#startDate').val(start.format('DD/MM/YY') + 'T16:00');
     $('#endDate').val(end.format('DD/MM/YY') + 'T10:00');
+
 });

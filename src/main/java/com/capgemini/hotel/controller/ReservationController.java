@@ -69,21 +69,55 @@ public class ReservationController {
         return;
     }
 
-    @RequestMapping(value = "/{reservationNumber}", method = RequestMethod.GET)
-    public Reservation get(@PathVariable long reservationNumber){
-        return reservationRepository.findOne(reservationNumber);
-    }
+    @RequestMapping(value = "/", method = RequestMethod.PUT)
+    public void update(@RequestBody ReservationDTO reservationDTO) {
 
-    @RequestMapping(value = "/{reservationNumber}", method = RequestMethod.PUT)
-    public Reservation put (@RequestBody Reservation reservation, @PathVariable long reservationNumber){
+        // eerst mappen
+        Reservation reservation = new Reservation();
+        reservation = ReservationMapper.map(reservationDTO);
+
+        // guest en room ophalen --> Servicelaag.
+        Guest foundGuest;
+        Room foundRoom;
+
+
+        // find guestobject by id >> add to reservation.
+        foundGuest = guestRepository.findOne(reservationDTO.getGuestId());
+        reservation.setGuest(foundGuest);
+
+        // find roomobject by id >> add to reservation.
+        foundRoom = roomRepository.findOne(reservationDTO.getRoomId());
+        reservation.setRoom(foundRoom);
+
+        // Save to repository
         reservationRepository.save(reservation);
-        return reservationRepository.findOne(reservation.getReservationNumber());
+        return;
     }
 
-    @RequestMapping(value = "/{reservationNumber}", method = RequestMethod.DELETE)
-    public Boolean delete(@PathVariable long reservationNumber){
-        reservationRepository.delete(reservationNumber);
-        return !reservationRepository.exists(reservationNumber);
+
+    @RequestMapping(value = "/", method = RequestMethod.DELETE)
+    public void delete(@RequestBody ReservationDTO reservationDTO) {
+
+        // eerst mappen
+        Reservation reservation = new Reservation();
+        reservation = ReservationMapper.map(reservationDTO);
+
+        // guest en room ophalen --> Servicelaag.
+        Guest foundGuest;
+        Room foundRoom;
+
+
+        // find guestobject by id >> add to reservation.
+        foundGuest = guestRepository.findOne(reservationDTO.getGuestId());
+        reservation.setGuest(foundGuest);
+
+        // find roomobject by id >> add to reservation.
+        foundRoom = roomRepository.findOne(reservationDTO.getRoomId());
+        reservation.setRoom(foundRoom);
+
+        // Save to repository
+        reservationRepository.delete(reservation);
+
     }
 
 
