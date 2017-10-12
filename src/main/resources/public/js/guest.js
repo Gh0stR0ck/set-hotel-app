@@ -68,7 +68,7 @@ function handleGuest(type) {
             };
             params.error = function (err) {
                 console.log(err);
-                toastr["error"]('Error while adding guest: ' + err);
+                toastr["error"](err.responseJSON.join('<br>'));
             };
 
             break;
@@ -85,7 +85,7 @@ function handleGuest(type) {
             };
             params.error = function (err) {
                 console.log(err);
-                toastr["error"]('Error while updating guest: ' + err);
+                toastr["error"](err.responseJSON.join('<br>'));
             };
 
             break;
@@ -102,7 +102,7 @@ function handleGuest(type) {
             };
             params.error = function (err) {
                 console.log(err);
-                toastr["error"]('Error while deleting guest: ' + err);
+                toastr["error"](err.responseJSON.join('<br>'));
             };
             break;
 

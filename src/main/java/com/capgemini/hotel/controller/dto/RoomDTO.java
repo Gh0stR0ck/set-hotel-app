@@ -1,11 +1,23 @@
 package com.capgemini.hotel.controller.dto;
 
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotEmpty;
+
+import javax.validation.Valid;
+
 public class RoomDTO{
     private Long roomNumber;
+
+    @Length(max = 25, min = 1, message = "Room name must be between 1 and 25 characters.")
     private String roomName;
+    @Valid
     private RoomTypeDTO roomType;
+    @Valid
     private RoomSizeDTO roomSize;
+    @Valid
     private RoomStatusDTO roomStatus;
+
+
 
     public RoomDTO() {
     }

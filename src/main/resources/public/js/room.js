@@ -28,7 +28,7 @@ function handleRoom(type) {
 
     var obj = {
         roomNumber:     $("#roomNumber").val(),
-        roomName: $("#roomName").val(),
+        roomName:       $("#roomName").val(),
         roomType:       { name: $("#roomType").val() },
         roomSize:       { name: $("#roomSize").val() },
         roomStatus:     { name: $("#roomStatus").val() },
@@ -50,21 +50,15 @@ function handleRoom(type) {
                 console.log(result);
                 // toggle modal
                 $("#roomModal").modal('toggle');
-                // add to DataTable
-//                var rowNode = table.row.add(result).draw().node();
-//                // Highlight row (timeout)
-//                $(rowNode).addClass('table-success');
-//                setTimeout(function () {
-//                    $(rowNode).removeClass('table-success');
-//                }, 3000);
                 table.ajax.reload();
                 toastr["success"]('Room ' + result["roomNumber"] + ' added.');
 
-                params.error = function (err) {
-                    console.log(err);
-                    toastr["error"]('Error: ' + err);
-                }
             };
+            params.error = function (err) {
+                    console.log(err);
+                    toastr["error"](err.responseJSON.join('<br>'));
+            };
+
             break;
 
         case 'update':
@@ -76,11 +70,11 @@ function handleRoom(type) {
                 // Refresh DataTable
                 table.ajax.reload();
                 toastr["success"]('Room ' + result["roomNumber"] + ' updated.')
-
+            };
                 params.error = function (err) {
                     console.log(err);
-                    toastr["error"]('Error: ' + err);
-                }
+                    toastr["error"](err.responseJSON.join('<br>'));
+
             };
             break;
 
@@ -97,7 +91,7 @@ function handleRoom(type) {
             };
             params.error = function (err) {
                 console.log(err);
-                toastr["error"]('Error deleting room: ' + err);
+                toastr["error"](err.responseJSON.join('<br>'));
             };
             break;
 
