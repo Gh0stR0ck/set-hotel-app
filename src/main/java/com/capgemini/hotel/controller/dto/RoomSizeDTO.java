@@ -1,7 +1,11 @@
 package com.capgemini.hotel.controller.dto;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 public class RoomSizeDTO {
+    @NotEmpty(message = "Room size must be specified.")
     private String name;
+
     private String label;
 
     public RoomSizeDTO(){
