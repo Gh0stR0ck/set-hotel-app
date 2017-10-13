@@ -1,17 +1,7 @@
 package com.capgemini.hotel.controller.dto;
 
-import org.hibernate.validator.constraints.Length;
-import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.NotEmpty;
-
-import javax.persistence.*;
-import javax.validation.Valid;
-import javax.validation.constraints.AssertFalse;
-import javax.validation.constraints.AssertTrue;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
-import java.time.LocalDateTime;
-
 
 public class ReservationDTO {
 
@@ -34,7 +24,6 @@ public class ReservationDTO {
 
 
     //only used for readability outgoing.
-
     private String guestName;
     private String roomName;
 
