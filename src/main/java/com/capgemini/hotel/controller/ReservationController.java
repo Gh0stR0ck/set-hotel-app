@@ -74,29 +74,8 @@ public class ReservationController {
 
     @RequestMapping(value = "/", method = RequestMethod.PUT)
     public void update(@Valid @RequestBody ReservationDTO reservationDTO) {
-
-        // eerst mappen
-        Reservation reservation = new Reservation();
-        reservation = ReservationMapper.map(reservationDTO);
-
-        // guest en room ophalen --> Servicelaag.
-        Guest foundGuest;
-        Room foundRoom;
-
-
-        // find guestobject by id >> add to reservation.
-        foundGuest = guestRepository.findOne(reservationDTO.getGuestId());
-        reservation.setGuest(foundGuest);
-
-        // find roomobject by id >> add to reservation.
-        foundRoom = roomRepository.findOne(reservationDTO.getRoomId());
-        reservation.setRoom(foundRoom);
-
-        // Save to repository
-        reservationRepository.save(reservation);
-        return;
+        this.post(reservationDTO);
     }
-
 
     @RequestMapping(value = "/", method = RequestMethod.DELETE)
     public void delete(@RequestBody ReservationDTO reservationDTO) {
