@@ -22,11 +22,11 @@ public class Reservation {
     }
 
     public Reservation(Guest guest, Room room, LocalDateTime startDate, LocalDateTime endDate, boolean payment) {
-        this.guest = guest;
-        this.room = room;
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.payment = payment;
+        this.guest =        guest;
+        this.room =         room;
+        this.startDate =    startDate;
+        this.endDate =      endDate;
+        this.payment =      payment;
     }
 
     public Long getReservationNumber() {

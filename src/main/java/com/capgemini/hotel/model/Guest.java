@@ -2,10 +2,7 @@ package com.capgemini.hotel.model;
 
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
-import org.springframework.format.annotation.NumberFormat;
-
 import javax.persistence.*;
-import javax.validation.Valid;
 import javax.validation.constraints.Pattern;
 
 @Entity
@@ -15,36 +12,27 @@ public class Guest {
     @Column(name = "guestNumber")
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long guestNumber;
-    @Valid
     @Length(max = 25, min = 1, message = "Surname must be between 1 and 25 characters.")
     private String surname;
-    @Valid
     @Length(max = 25, min = 1, message = "Name must be between 1 and 25 characters.")
     private String name;
-    @Valid
     @Length(max = 25, min = 1, message = "Address must be between 1 and 25 characters.")
     private String address;
-    @Valid
     @Length(max = 15, min = 1, message = "Zipcode must be between 1 and 15 characters.")
     private String zipcode;
-    @Valid
     @Length(max = 25, min = 1, message = "City must be between 1 and 25 characters.")
     private String city;
-    @Valid
     @Length(max = 25, min = 1, message = "Country must be between 1 and 25 characters.")
     private String country;
-    @Valid
     @Length(max = 18, min = 1, message = "Phone number must be between 1 and 18 numbers.")
     @Pattern(regexp="\\d+", message = "Phone number must only contain numbers.")
     private String phone;
-    @Valid
     @Length(max = 50, min = 6, message = "E-mail must be at least 6 characters.")
     @Email(regexp = "(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|\"(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21\\x23-\\x5b\\x5d-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])*\")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21-\\x5a\\x53-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)\\])", message = "E-mail is not a well-formed e-mail address.")
     private String email;
 
 
     public Guest() {
-        // JSON spring boot purpose
     }
 
 
