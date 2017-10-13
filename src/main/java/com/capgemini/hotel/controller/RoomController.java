@@ -77,45 +77,6 @@ public class RoomController {
         }
         return errors;
     }
-
-//    public String setFormatType(Room room) {
-//        switch(room.getRoomType()){
-//            case BUDGET:
-//                return  "Budget";
-//            case LUXURY:
-//                return "Luxury";
-//            case NORMAL:
-//                return "Normal";
-//            default:
-//                return "Budget";
-//        }
-//    }
-//
-//    public String setFormatSize(Room room) {
-//        switch (room.getRoomSize()){
-//            case ONEPERSON:
-//                return "One Person";
-//            case TWOPERSONS:
-//                return "Two Persons";
-//            case THREEFOURPERSONS:
-//                return "Three-Four Persons";
-//            case FIVESIXPERSONS:
-//                return "Five-Six Persons";
-//            default:
-//                return "One Person";
-//        }
-//    }
-//
-//    public String setFormatStatus(Room room) {
-//        switch (room.getRoomStatus()){
-//            case BLOCKED:
-//                return "Blocked";
-//            case OPERATIONAL:
-//                return "Operational";
-//            default:
-//                return "Operational";
-//        }
-//    }
 }
 
 

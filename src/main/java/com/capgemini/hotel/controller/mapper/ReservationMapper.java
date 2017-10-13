@@ -14,10 +14,6 @@ public class ReservationMapper {
     private static final DateTimeFormatter fPresentation = DateTimeFormatter.ofPattern(PRESENTATION_DATE_FORMAT);
     private static final DateTimeFormatter fObject = DateTimeFormatter.ofPattern(OBJECT_DATE_FORMAT);
 
-    //
-    //
-    //
-
     public static ReservationDTO map(Reservation reservation) {
 
         final ReservationDTO reservationDTO = new ReservationDTO();
@@ -61,12 +57,6 @@ public class ReservationMapper {
 
         return reservationDTO;
     }
-
-    //
-    //
-    //
-    //
-    //
 
     public static Reservation map(ReservationDTO reservationDTO) {
 

@@ -80,11 +80,11 @@ public class InitController {
         guest.setName("Akin");
         guest.setSurname("Ekim");
         guest.setAddress("Leasestraat 123");
-        guest.setCity("Arnhem");
+        guest.setCity("Nijmegen");
         guest.setEmail("akin@ekim.nl");
         guest.setPhone("068877223311");
         guest.setCountry("Nederland");
-        guest.setZipcode("1265KL");
+        guest.setZipcode("6535XD");
         guestRepository.save(guest);
 
 
