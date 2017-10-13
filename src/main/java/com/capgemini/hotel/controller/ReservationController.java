@@ -49,25 +49,7 @@ public class ReservationController {
 
     @RequestMapping(value = "/", method = RequestMethod.POST)
     public void post(@Valid @RequestBody ReservationDTO reservationDTO) {
-
-        // eerst mappen
-        Reservation reservation = new Reservation();
-        reservation = ReservationMapper.map(reservationDTO);
-
-        // guest en room ophalen --> Servicelaag.
-        Guest foundGuest;
-        Room foundRoom;
-
-
-        // find guestobject by id >> add to reservation.
-        foundGuest = guestRepository.findOne(reservationDTO.getGuestId());
-        reservation.setGuest(foundGuest);
-
-        // find roomobject by id >> add to reservation.
-        foundRoom = roomRepository.findOne(reservationDTO.getRoomId());
-        reservation.setRoom(foundRoom);
-
-        // Save to repository
+        Reservation reservation = mapReservationEnrich(reservationDTO);
         reservationRepository.save(reservation);
         return;
     }
@@ -79,25 +61,7 @@ public class ReservationController {
 
     @RequestMapping(value = "/", method = RequestMethod.DELETE)
     public void delete(@RequestBody ReservationDTO reservationDTO) {
-
-        // eerst mappen
-        Reservation reservation = new Reservation();
-        reservation = ReservationMapper.map(reservationDTO);
-
-        // guest en room ophalen --> Servicelaag.
-        Guest foundGuest;
-        Room foundRoom;
-
-
-        // find guestobject by id >> add to reservation.
-        foundGuest = guestRepository.findOne(reservationDTO.getGuestId());
-        reservation.setGuest(foundGuest);
-
-        // find roomobject by id >> add to reservation.
-        foundRoom = roomRepository.findOne(reservationDTO.getRoomId());
-        reservation.setRoom(foundRoom);
-
-        // Save to repository
+        Reservation reservation = mapReservationEnrich(reservationDTO);
         reservationRepository.delete(reservation);
 
     }
@@ -107,5 +71,23 @@ public class ReservationController {
     @ResponseBody
     public List<String> processValidationError(MethodArgumentNotValidException ex) {
         return mapErrorFields(ex);
+    }
+
+    private Reservation mapReservationEnrich(@Valid @RequestBody ReservationDTO reservationDTO) {
+        // eerst mappen
+        Reservation reservation = ReservationMapper.map(reservationDTO);
+
+        // guest en room ophalen --> Servicelaag.
+        Guest foundGuest;
+        Room foundRoom;
+
+        // find guestobject by id >> add to reservation.
+        foundGuest = guestRepository.findOne(reservationDTO.getGuestId());
+        reservation.setGuest(foundGuest);
+
+        // find roomobject by id >> add to reservation.
+        foundRoom = roomRepository.findOne(reservationDTO.getRoomId());
+        reservation.setRoom(foundRoom);
+        return reservation;
     }
 }
