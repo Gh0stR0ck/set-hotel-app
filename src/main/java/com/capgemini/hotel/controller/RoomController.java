@@ -6,14 +6,13 @@ import com.capgemini.hotel.model.*;
 import com.capgemini.hotel.repository.RoomRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
-
 import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.capgemini.hotel.utils.ErrorMapping.mapErrorFields;
 
 
 @RestController
@@ -69,13 +68,7 @@ public class RoomController {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ResponseBody
     public List<String> processValidationError(MethodArgumentNotValidException ex) {
-        BindingResult result = ex.getBindingResult();
-        List<FieldError> fieldErrors = result.getFieldErrors();
-        ArrayList<String> errors = new ArrayList<>();
-        for (FieldError field : fieldErrors){
-            errors.add(field.getDefaultMessage());
-        }
-        return errors;
+        return mapErrorFields(ex);
     }
 }
 
